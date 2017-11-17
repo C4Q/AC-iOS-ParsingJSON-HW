@@ -14,25 +14,25 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     //Outlets
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     //View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
-     self.tableView.delegate = self
+        self.tableView.delegate = self
         self.tableView.dataSource = self
         loadData()
     }
     
     func loadData(){
         if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json") {
-        let myURL = URL(fileURLWithPath: path)
-        if let data = try? Data(contentsOf: myURL){
-            self.stocks = Stocks.getStocks(from: data)
+            let myURL = URL(fileURLWithPath: path)
+            if let data = try? Data(contentsOf: myURL){
+                self.stocks = Stocks.getStocks(from: data)
+            }
         }
-    }
-    
+        
     }
     
     
@@ -60,9 +60,7 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
         if let destination = segue.destination as? DetailedStocksViewController {
             let selectedRow = tableView.indexPathForSelectedRow?.row
             let selectedStock = stocks[selectedRow!]
-     
-         
-            
+            destination.stocks = selectedStock
         }
     }
     

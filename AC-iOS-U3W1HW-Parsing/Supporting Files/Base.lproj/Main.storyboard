@@ -324,6 +324,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Z7v-1J-7u4"/>
                     </view>
+                    <connections>
+                        <outlet property="closeLabel" destination="BDH-MH-qbv" id="YNQ-PY-8hP"/>
+                        <outlet property="dateLabel" destination="LKH-Gw-YM1" id="sLt-Zk-w0n"/>
+                        <outlet property="image" destination="umm-oI-2A9" id="BAF-IP-ybY"/>
+                        <outlet property="openLabel" destination="28P-pe-tq2" id="zV8-dl-0xD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOV-R8-6iy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

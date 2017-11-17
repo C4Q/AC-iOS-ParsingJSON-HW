@@ -10,8 +10,27 @@ import UIKit
 
 class DetailedStocksViewController: UIViewController {
 
+    var stocks: Stocks?
+    
+    //Outlets
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var closeLabel: UILabel!
+    @IBOutlet weak var openLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateLabel.text = "Date: " + (stocks?.date)!
+        openLabel.text = "Open: $" + (stocks?.open.description)!
+        closeLabel.text = "Close: $" + (stocks?.close.description)!
+        
     }
 
+    
+    
+    
+    
+    
 }
+
