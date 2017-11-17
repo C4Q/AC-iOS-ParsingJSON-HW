@@ -9,3 +9,40 @@
 import Foundation
 
 
+class Stock{
+    let date: String
+    let open: Double
+    let close: Double
+    
+    init(date: String, open: Double, close: Double) {
+        self.date = date
+        self.open = open
+        self.close = close
+    }
+    
+    convenience init?(for dict: [String: Any]){
+        let date = dict["date"] as? String
+        let open = dict["open"] as? Double
+        let close = dict["close"] as? Double
+        self.init(date: date!, open: open!, close: close!)
+    }
+
+    static func getStocks(from data: Data) -> [Stock]{
+        var stocks = [Stock]()
+        
+        do{
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            guard let jsonDictArr = json as? [[String: Any]] else { return [] }
+            
+            for jsonDict in jsonDictArr{
+                if let newStock = Stock.init(for: jsonDict){
+                    stocks.append(newStock)
+                }
+            }
+        }catch{
+            print(error)
+        }
+        
+        return stocks
+    }
+}

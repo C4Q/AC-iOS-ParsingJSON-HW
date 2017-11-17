@@ -8,18 +8,39 @@
 
 import UIKit
 
-class stocksViewController: UIViewController {
-
+class stocksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+ 
+    @IBOutlet weak var tableView: UITableView!
+    var stocks = [Stock]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        loadData()
     }
     
-
+    func loadData(){
+        if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json"){
+            let myUrl = URL(fileURLWithPath: path)
+            if let data = try? Data(contentsOf: myUrl){
+                self.stocks = Stock.getStocks(from: data)
+                
+            }
+        }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stocks.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "Stock Cell", for: indexPath)
+       let stock = stocks[indexPath.row]
+        cell.textLabel?.text = stock.date
+        cell.detailTextLabel?.text = stock.open.description
+        return cell
+    }
+    
 }
