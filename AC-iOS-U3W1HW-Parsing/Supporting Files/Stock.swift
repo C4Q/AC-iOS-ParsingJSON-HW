@@ -19,10 +19,14 @@ class Stock {
 	}
 	
 	convenience init?(from jsonDict: [String: Any]) {
-		guard let date = jsonDict["date"] as? String else { return nil }
-		guard let open = jsonDict["open"] as? Double else { return nil }
-		guard let close = jsonDict["close"] as? Double else { return nil }
-		guard let change = jsonDict["change"] as? Double else { return nil }
+		guard
+			let date = jsonDict["date"] as? String,
+			let open = jsonDict["open"] as? Double,
+			let close = jsonDict["close"] as? Double,
+			let change = jsonDict["change"] as? Double
+		else {
+			return nil
+		}
 		self.init(date: date, open: open, close: close, change: change)
 	} //end of Convenience init
 	

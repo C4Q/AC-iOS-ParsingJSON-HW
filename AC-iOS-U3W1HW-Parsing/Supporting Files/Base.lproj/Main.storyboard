@@ -161,7 +161,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OPt-dB-nbA">
-                                <rect key="frame" x="0.0" y="76" width="375" height="542"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Contact Cell" textLabel="2xh-do-X08" detailTextLabel="Xlh-aM-4un" style="IBUITableViewCellStyleSubtitle" id="o66-tr-WP8">
@@ -203,7 +203,7 @@
                             <constraint firstItem="OPt-dB-nbA" firstAttribute="leading" secondItem="3ek-1o-d5X" secondAttribute="leading" id="0LN-O1-dwE"/>
                             <constraint firstItem="tWM-FY-KiR" firstAttribute="trailing" secondItem="OPt-dB-nbA" secondAttribute="trailing" id="Agp-Yd-IY6"/>
                             <constraint firstItem="3ek-1o-d5X" firstAttribute="bottom" secondItem="OPt-dB-nbA" secondAttribute="bottom" id="Ilt-wf-hJh"/>
-                            <constraint firstItem="OPt-dB-nbA" firstAttribute="top" secondItem="3ek-1o-d5X" secondAttribute="top" constant="12" id="cpr-2A-WxI"/>
+                            <constraint firstItem="OPt-dB-nbA" firstAttribute="top" secondItem="tWM-FY-KiR" secondAttribute="bottom" id="cpr-2A-WxI"/>
                             <constraint firstItem="3ek-1o-d5X" firstAttribute="trailing" secondItem="OPt-dB-nbA" secondAttribute="trailing" id="ed5-Vu-O4L"/>
                             <constraint firstItem="tWM-FY-KiR" firstAttribute="top" secondItem="3ek-1o-d5X" secondAttribute="top" id="mak-Q5-xi8"/>
                             <constraint firstItem="tWM-FY-KiR" firstAttribute="leading" secondItem="OPt-dB-nbA" secondAttribute="leading" id="vLh-rj-M5C"/>
@@ -218,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43f-hP-TGq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="223" y="-557"/>
+            <point key="canvasLocation" x="221.59999999999999" y="-557.27136431784118"/>
         </scene>
         <!--ContactsDVC-->
         <scene sceneID="2IW-Pj-PoV">

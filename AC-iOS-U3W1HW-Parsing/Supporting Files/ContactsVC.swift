@@ -37,11 +37,20 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 	}
 	
 	//MARK: - Search Bar
+//	var sortedContacts: [Contact] = self.contacts.sorted {$0 < $1}
+//	}
+	var organizedContacts: [Contact] {
+		return contacts.sorted(by: { (a, b) -> Bool in
+			a.name.first < b.name.first
+		})
+	}
+	
+	
 	var filteredContacts: [Contact] {
 		guard let searchTerm = searchTerm, searchTerm != "" else {
-			return contacts
+			return organizedContacts
 		}
-		return contacts.filter {(contact) in
+		return organizedContacts.filter {(contact) in
 			contact.name.first.lowercased().contains(searchTerm.lowercased()) || contact.name.last.lowercased().contains(searchTerm.lowercased())
 		}
 	}
@@ -64,7 +73,6 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 	//MARK: - Data Source Methods
 	func tableView(_ contactsTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return filteredContacts.count
-//		return contacts.count
 	}
 	
 	func tableView(_ contactsTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
