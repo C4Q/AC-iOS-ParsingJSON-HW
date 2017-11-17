@@ -27,7 +27,16 @@ class ContactsDVC: UIViewController {
 		cityStateLabel.text = "\(contact.location.city) \(contact.location.state)"
 		phoneNumberLabel.text = contact.phone
 		emailLabel.text = contact.email
-//		personImageView.image = contact.picture.large
+//		personImageView.downloadedFrom(link: contact.picture.large)
+//		personImageView.image
+//		imageView.downloadedFrom(link: contact.picture.large)
+		/*
+		if let url = URL(string: contact.picture.large) {
+			personImageView.contentMode = .scaleAspectFit
+			downloadImage(url: url)
+		}
+		*/
+
 	}
 
 

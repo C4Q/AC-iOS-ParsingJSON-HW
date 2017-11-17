@@ -33,7 +33,15 @@ class StocksDVC: UIViewController {
 	//Actions
 	func loadData() {
 		//set labels - date, open, close, image, background color (view.backgroundColor)
-		view.backgroundColor = UIColor.green
+		stockDate.text = stock?.date
+		stockOpen.text = stock?.open.description
+		stockClose.text = stock?.close.description
+		//thumbsImage.image.
+		if (stock!.close) - (stock!.open) < 0.0 {
+			view.backgroundColor = UIColor.green
+		} else {
+			view.backgroundColor = UIColor.red
+		}
 	}
 	
 }

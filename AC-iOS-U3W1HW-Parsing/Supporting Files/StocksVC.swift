@@ -10,6 +10,7 @@ class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
 	@IBOutlet weak var stockTableView: UITableView!
 	
 	var stocks = [Stock]()
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -23,7 +24,8 @@ class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
 			let myURL = URL(fileURLWithPath: path)
 			if let data = try? Data(contentsOf: myURL) {
 				do {
-					self.stocks = try [JSONDecoder().decode(Stock.self, from: data)]
+					let results = try [JSONDecoder().decode(Stock.self, from: data)]
+					self.stocks = results
 				}
 				catch {
 					print(error)
