@@ -5,7 +5,7 @@
 
 import UIKit
 
-class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class StocksVC: UIViewController, UITableViewDelegate {
 	
 	//MARK: - Outlets
 	@IBOutlet weak var stockTableView: UITableView!
@@ -32,7 +32,31 @@ class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 		}
 	}
 	
-	//MARK: - tableView - Data Source Methods
+	//MARK: - Navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let destination = segue.destination as? StocksDVC {
+			let row = stockTableView.indexPathForSelectedRow!.row
+			destination.stock = stocks[row]
+		}
+	}
+}
+
+//MARK: - tableView - Data Source Methods
+extension StocksVC: UITableViewDataSource {
+
+	
+	/*
+	func numberOfSections(in tableView: UITableView) -> Int {
+			return months.count
+	}
+	*/
+	
+	/*
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	
+	}
+	*/
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return stocks.count //
 	}
@@ -45,20 +69,5 @@ class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 		return cell
 	}
 	
-	//MARK: - Navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let destination = segue.destination as? StocksDVC {
-			let row = stockTableView.indexPathForSelectedRow!.row
-			destination.stock = stocks[row]
-		}
-	}
 }
-
-
-
-
-
-
-
-
 

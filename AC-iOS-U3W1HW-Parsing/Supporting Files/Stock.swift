@@ -10,12 +10,14 @@ class Stock {
 	let open: Double //116.37,
 	let close: Double //116.11
 	let change: Double //-0.66
+	let label: String
 
-	init(date: String, open: Double, close: Double, change: Double) {
+	init(date: String, open: Double, close: Double, change: Double, label: String) {
 		self.date = date
 		self.open = open
 		self.close = close
 		self.change = change
+		self.label = label
 	}
 	
 	convenience init?(from jsonDict: [String: Any]) {
@@ -23,11 +25,12 @@ class Stock {
 			let date = jsonDict["date"] as? String,
 			let open = jsonDict["open"] as? Double,
 			let close = jsonDict["close"] as? Double,
-			let change = jsonDict["change"] as? Double
+			let change = jsonDict["change"] as? Double,
+			let label = jsonDict["label"] as? String
 		else {
 			return nil
 		}
-		self.init(date: date, open: open, close: close, change: change)
+		self.init(date: date, open: open, close: close, change: change, label: label)
 	} //end of Convenience init
 	
 	static func getStocks(from data: Data) -> [Stock] {

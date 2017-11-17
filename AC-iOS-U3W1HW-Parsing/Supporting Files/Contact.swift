@@ -5,7 +5,6 @@
 
 import Foundation
 
-
 struct ContactResultsWrapper: Codable {
 	let results: [Contact]
 }
