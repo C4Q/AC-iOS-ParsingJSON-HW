@@ -5,18 +5,44 @@
 
 import Foundation
 
-struct Stock: Codable {
+class Stock {
 	let date: String //"2015-11-11"
 	let open: Double //116.37,
-	let high: Double //117.42
-	let low: Double //115.21
 	let close: Double //116.11
-	let volume: Int //45217971
-	let unadjustedVolume: Int //":45217971
 	let change: Double //-0.66
-	let changePercent: Double //-0.565
-	let vwap: Double //116.3069
-	let label: String //"Nov 11, 15"
-	let changeOverTime: Double //0
+
+	init(date: String, open: Double, close: Double, change: Double) {
+		self.date = date
+		self.open = open
+		self.close = close
+		self.change = change
+	}
+	
+	convenience init?(from jsonDict: [String: Any]) {
+		guard let date = jsonDict["date"] as? String else { return nil }
+		guard let open = jsonDict["open"] as? Double else { return nil }
+		guard let close = jsonDict["close"] as? Double else { return nil }
+		guard let change = jsonDict["change"] as? Double else { return nil }
+		self.init(date: date, open: open, close: close, change: change)
+	} //end of Convenience init
+	
+	static func getStocks(from data: Data) -> [Stock] {
+		var stocks = [Stock]()
+		do {
+			let json = try JSONSerialization.jsonObject(with: data, options: []) //json is now an arra of dictionary
+			if let stockDictArray = json as? [[String:Any]] {
+				for stockDict in stockDictArray {
+					if let stock = Stock(from: stockDict) {
+						stocks.append(stock)
+					}
+				}
+			}
+		}
+		catch {
+			print("Error converting data to JSON")
+		}
+		return stocks
+	}
+	
 }
 

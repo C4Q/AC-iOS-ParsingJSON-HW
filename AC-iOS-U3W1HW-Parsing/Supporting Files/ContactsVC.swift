@@ -10,8 +10,6 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 	@IBOutlet weak var contactsTableView: UITableView!
 	@IBOutlet weak var searchBar: UISearchBar!
 
-	
-//	var contacts = Contact.init(results: [])
 	var contacts = [Contact]()
 
 	//Mark: - Overrides
@@ -19,6 +17,7 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 		super.viewDidLoad()
 		self.contactsTableView.dataSource = self
 		self.contactsTableView.delegate = self
+		self.searchBar.delegate = self
 		loadContactData()
 	}
 	
@@ -37,34 +36,19 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 		}
 	}
 	
-	//MARK: - Data Source Methods
-	func tableView(_ contactsTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return contacts.count //
-	}
-	
-	func tableView(_ contactsTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let contact = contacts[indexPath.row]
-		let cell = self.contactsTableView.dequeueReusableCell(withIdentifier: "Contact Cell", for: indexPath)
-		cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
-		cell.detailTextLabel?.text = contact.location.city
-		return cell
-	}
-	
-	
-	//MARK: - Search Bar	
-	var filteredContactArr: [Contact] {
+	//MARK: - Search Bar
+	var filteredContacts: [Contact] {
 		guard let searchTerm = searchTerm, searchTerm != "" else {
 			return contacts
 		}
-		
 		return contacts.filter {(contact) in
-			contact.name.first.contains(searchTerm.lowercased()) || contact.name.last.contains(searchTerm.lowercased())
+			contact.name.first.lowercased().contains(searchTerm.lowercased()) || contact.name.last.lowercased().contains(searchTerm.lowercased())
 		}
 	}
 	
-	var searchTerm: String? {//computed property
-		didSet { //create a property observer to let us know when the search term changes, reload the data
-			self.contactsTableView.reloadData() //whenever we change the search term, reload the data
+	var searchTerm: String? {
+		didSet {
+			self.contactsTableView.reloadData()
 		}
 	}
 	
@@ -75,6 +59,20 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 	}
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		self.searchTerm = searchText
+	}
+	
+	//MARK: - Data Source Methods
+	func tableView(_ contactsTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return filteredContacts.count
+//		return contacts.count
+	}
+	
+	func tableView(_ contactsTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let contact = filteredContacts[indexPath.row]
+		let cell = self.contactsTableView.dequeueReusableCell(withIdentifier: "Contact Cell", for: indexPath)
+		cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
+		cell.detailTextLabel?.text = contact.location.city
+		return cell
 	}
 	
 	//MARK: - Navigation
