@@ -102,19 +102,23 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
         var dateTitle = ""
-        var averageOpen = 0
+        var counter = 0
+        var stockDateArray = sortedStocks[section]
+        
+        var modelDate = stockDateArray.first?.date
         
         
-        for stock in sortedStocks {
-            for date in stock {
-                dateTitle = date.date.description
+        for date in modelDate! {
+            dateTitle = dateTitle + date.description
+            counter += 1
+            
+            if counter == 7 {
+                break
             }
         }
-        
-        
-        
-        
+
         return dateTitle
     }
     
