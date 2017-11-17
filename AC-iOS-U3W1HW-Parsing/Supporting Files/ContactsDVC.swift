@@ -27,15 +27,20 @@ class ContactsDVC: UIViewController {
 		cityStateLabel.text = "\(contact.location.city) \(contact.location.state)"
 		phoneNumberLabel.text = contact.phone
 		emailLabel.text = contact.email
-//		personImageView.downloadedFrom(link: contact.picture.large)
-//		personImageView.image
-//		imageView.downloadedFrom(link: contact.picture.large)
-		/*
+		
+		//set image
 		if let url = URL(string: contact.picture.large) {
 			personImageView.contentMode = .scaleAspectFit
-			downloadImage(url: url)
+			//doing work on a background thread - to avoid crashing the phone
+			DispatchQueue.global().sync {
+				if let data = try? Data.init(contentsOf: url) {
+					//go back to main thread to update UI
+					DispatchQueue.main.async {
+						self.personImageView.image = UIImage(data: data)
+					}
+				}
+			}
 		}
-		*/
 
 	}
 

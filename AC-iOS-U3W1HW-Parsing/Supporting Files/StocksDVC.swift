@@ -1,10 +1,7 @@
-//
 //  StockDVC.swift
 //  AC-iOS-U3W1HW-Parsing
-//
 //  Created by C4Q on 11/16/17.
 //  Copyright © 2017 C4Q . All rights reserved.
-//
 
 import UIKit
 
@@ -34,13 +31,14 @@ class StocksDVC: UIViewController {
 	func loadData() {
 		//set labels - date, open, close, image, background color (view.backgroundColor)
 		stockDate.text = stock?.date
-		stockOpen.text = stock?.open.description
-		stockClose.text = stock?.close.description
-		//thumbsImage.image.
+		stockOpen.text = "Open: \(stock!.open.description)"
+		stockClose.text = "Close \(stock!.close.description)"
 		if (stock!.close) - (stock!.open) < 0.0 {
 			view.backgroundColor = UIColor.green
+			thumbsImage.image = #imageLiteral(resourceName: "thumbsUp")
 		} else {
 			view.backgroundColor = UIColor.red
+			thumbsImage.image = #imageLiteral(resourceName: "thumbsDown")
 		}
 	}
 	
