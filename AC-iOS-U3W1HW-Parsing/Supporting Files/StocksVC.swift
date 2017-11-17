@@ -19,18 +19,6 @@ class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
 	}
 	
 	func loadStockData() {
-//		if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json") {
-//			let myURL = URL(fileURLWithPath: path)
-//			if let data = try? Data(contentsOf: myURL) {
-//				do {
-//					let results = try [JSONDecoder().decode(Stock.self, from: data)]
-//					self.stocks = results
-//				}
-//				catch {
-//					print(error)
-//				}
-//			}
-//		}
 		if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json") {
 			let myURL = URL(fileURLWithPath: path)
 			if let data = try? Data(contentsOf: myURL) {
