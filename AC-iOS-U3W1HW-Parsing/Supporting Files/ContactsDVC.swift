@@ -7,6 +7,7 @@ import UIKit
 
 class ContactsDVC: UIViewController {
 
+	//MARK: - Outlets
 	@IBOutlet weak var fullnameLabel: UILabel!
 	@IBOutlet weak var addressLabel: UILabel!
 	@IBOutlet weak var cityStateLabel: UILabel!
@@ -14,20 +15,22 @@ class ContactsDVC: UIViewController {
 	@IBOutlet weak var emailLabel: UILabel!
 	@IBOutlet weak var personImageView: UIImageView!
 	
+	//MARK: - Variables/Constants
 	var contact: Contact!
 
+	//MARK: - Overrides
     override func viewDidLoad() {
 		super.viewDidLoad()
 		loadData()
     }
 
+	//MARK: - Functions
 	func loadData() {
 		fullnameLabel.text = "\(contact.name.first) \(contact.name.last)"
 		addressLabel.text =  contact.location.street
 		cityStateLabel.text = "\(contact.location.city) \(contact.location.state)"
 		phoneNumberLabel.text = contact.phone
 		emailLabel.text = contact.email
-		
 		//set image
 		if let url = URL(string: contact.picture.large) {
 			personImageView.contentMode = .scaleAspectFit

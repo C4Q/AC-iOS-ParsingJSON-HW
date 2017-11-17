@@ -7,9 +7,11 @@ import UIKit
 
 class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
+	//MARK: - Outlets
 	@IBOutlet weak var contactsTableView: UITableView!
 	@IBOutlet weak var searchBar: UISearchBar!
 
+	//MARK: - Variables/Constants
 	var contacts = [Contact]()
 
 	//Mark: - Overrides
@@ -37,14 +39,9 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 	}
 	
 	//MARK: - Search Bar
-//	var sortedContacts: [Contact] = self.contacts.sorted {$0 < $1}
-//	}
 	var organizedContacts: [Contact] {
-		return contacts.sorted(by: { (a, b) -> Bool in
-			a.name.first < b.name.first
-		})
+		return contacts.sorted { $0.name.first < $1.name.first }
 	}
-	
 	
 	var filteredContacts: [Contact] {
 		guard let searchTerm = searchTerm, searchTerm != "" else {
@@ -61,6 +58,7 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 		}
 	}
 	
+	
 	//MARK: - Search Bar Delegate Methods
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		self.searchTerm = searchBar.text
@@ -69,6 +67,7 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		self.searchTerm = searchText
 	}
+	
 	
 	//MARK: - Data Source Methods
 	func tableView(_ contactsTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,6 +82,7 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 		return cell
 	}
 	
+	
 	//MARK: - Navigation
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let destination = segue.destination as? ContactsDVC {
@@ -90,7 +90,6 @@ class ContactsVC: UIViewController, UITableViewDataSource, UITableViewDelegate, 
 			destination.contact = self.contacts[row]
 		}
 	}
-	
 }
 
 	

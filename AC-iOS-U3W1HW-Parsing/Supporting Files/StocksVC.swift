@@ -7,10 +7,13 @@ import UIKit
 
 class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	
+	//MARK: - Outlets
 	@IBOutlet weak var stockTableView: UITableView!
 	
+	//MARK: - Variables/Constants
 	var stocks = [Stock]()
 
+	//MARK: - Overrides
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		stockTableView.dataSource = self
@@ -18,11 +21,12 @@ class StocksVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 		loadStockData()
 	}
 	
+	//MARK: - Functions
 	func loadStockData() {
 		if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json") {
 			let myURL = URL(fileURLWithPath: path)
 			if let data = try? Data(contentsOf: myURL) {				
-				let stocks = Stock.getStocks(from: data)
+				let stocks = Stock.getStocks(from: data).sorted { $0.date > $1.date }
 				self.stocks = stocks
 			}
 		}
