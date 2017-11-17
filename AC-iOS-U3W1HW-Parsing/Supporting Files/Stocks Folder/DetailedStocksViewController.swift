@@ -21,16 +21,31 @@ class DetailedStocksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateLabel.text = "Date: " + (stocks?.date)!
-        openLabel.text = "Open: $" + (stocks?.open.description)!
-        closeLabel.text = "Close: $" + (stocks?.close.description)!
+        uploadData()
+        loadImage()
         
     }
 
     
     
     
+    func uploadData() {
+        dateLabel.text = "Date: " + (stocks?.date)!
+        openLabel.text = "Open: $" + (stocks?.open.description)!
+        closeLabel.text = "Close: $" + (stocks?.close.description)!
+    }
     
-    
+    func loadImage(){
+
+        let close = Double((stocks?.close)!)
+        let open = Double((stocks?.open)!)
+
+        if close > open {
+            image.image = #imageLiteral(resourceName: "up")
+        } else {
+            image.image = #imageLiteral(resourceName: "down")
+        }
+    }
+
 }
 

@@ -11,6 +11,8 @@ import UIKit
 class DetailedContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var person: Person!
+    var personalInfo = [String]()
+
     
     //Outlets
     @IBOutlet weak var contactImage: UIImageView!
@@ -33,9 +35,20 @@ class DetailedContactsViewController: UIViewController, UITableViewDelegate, UIT
             }
         }
         
+        let address = "\(person.location.street.capitalized), \(person.location.city.capitalized), \(person.location.street.capitalized), \(person.location.postcode))"
+        let info = [person.phone?.description, person.cell?.description, person.email, address]
+        
+        for info in info {
+            personalInfo.append(info!)
+        }
+            
+            
+            
+            
         loadData()
     }
 
+  
     
     
     func loadData(){
@@ -46,18 +59,33 @@ class DetailedContactsViewController: UIViewController, UITableViewDelegate, UIT
     
     //Section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return personalInfo.count
     }
     
     //Cell
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Info Cell", for: indexPath)
-        cell.textLabel?.text = "Phone: " +
-            person.phone!
-        cell.detailTextLabel?.text = "Email: " + person.email!
+        
+        let setupInfo = personalInfo[indexPath.row]
+        
+    
+        if setupInfo == personalInfo[0] {
+            cell.textLabel?.text = "Phone: "
+        } else if setupInfo == personalInfo[1] {
+            cell.textLabel?.text = "Cell Phone: "
+        } else if setupInfo == personalInfo[2] {
+            cell.textLabel?.text = "Email: "
+        } else if setupInfo == personalInfo[3] {
+            cell.textLabel?.text = "Address: "
+        }
         
         
+
+        cell.detailTextLabel?.text = setupInfo
+        
+
         
         
         return cell

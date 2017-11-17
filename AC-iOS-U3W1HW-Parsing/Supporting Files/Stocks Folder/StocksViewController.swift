@@ -65,5 +65,25 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
+    //Sections
+    
+    var sectionNames = ""
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
