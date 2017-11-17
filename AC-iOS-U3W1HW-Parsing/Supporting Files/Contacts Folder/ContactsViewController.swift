@@ -71,13 +71,14 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("Search Bar Clicked")
-        tableView.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
     
     //Search Term
     var searchTerm: String? {
         didSet{
             self.tableView.reloadData()
+            
         }
     }
     
@@ -145,13 +146,16 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        tableView.resignFirstResponder()
+        resignFirstResponder()
+        
+        
     }
     
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        tableView.resignFirstResponder()
+        searchBar.resignFirstResponder()
     }
+    
     
     //Segue
     
@@ -160,7 +164,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
             let selectedRow = tableView.indexPathForSelectedRow?.row
             let selectedPerson = filtersTerms[selectedRow!]
             destination.person = selectedPerson
-     
+            
         }
     }
     
