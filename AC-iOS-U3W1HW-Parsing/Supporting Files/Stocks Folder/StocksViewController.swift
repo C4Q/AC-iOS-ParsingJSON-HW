@@ -12,6 +12,7 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     
     var stocks = [Stocks]()
     
+    var sortedStocks = [[Stocks]]()
     
     //Outlets
     
@@ -23,6 +24,43 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
         self.tableView.delegate = self
         self.tableView.dataSource = self
         loadData()
+        
+        
+        
+        var sortedDates: Set<String> = []
+
+        
+        for dates in stocks {
+            var dateString = ""
+            var counter = 0
+            let date = dates.date
+            
+            for char in date {
+                dateString = dateString + char.description
+                counter += 1
+                
+                if counter == 7 {
+                    break
+                }
+            }
+            
+            
+            
+           sortedDates.insert(dateString)
+            
+        }
+
+        
+        var sortedDateArr = [String]()
+        
+        sortedDateArr.append(contentsOf: sortedDates)
+        sortedDateArr.sort()
+
+        
+        for dates in sortedDateArr {
+            sortedStocks.append(stocks.filter{$0.date.contains(dates)})
+        }
+    
     }
     
     func loadData(){
@@ -35,21 +73,49 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
+    //
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sortedStocks.count
+    }
+  
+    
     
     //Sections
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stocks.count
+        return sortedStocks[section].count
     }
     
     //Cells
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let aStock = stocks[indexPath.row]
+        
+        let setupSection = sortedStocks[indexPath.section]
+        let aStock = setupSection[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "Stocks Cell", for: indexPath)
         cell.textLabel?.text = aStock.date
         cell.detailTextLabel?.text = "$" + aStock.open.description
         return cell
+    }
+    
+    
+    
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var dateTitle = ""
+        var averageOpen = 0
+        
+        
+        for stock in sortedStocks {
+            for date in stock {
+                dateTitle = date.date.description
+            }
+        }
+        
+        
+        
+        
+        return dateTitle
     }
     
     
@@ -59,18 +125,15 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailedStocksViewController {
             let selectedRow = tableView.indexPathForSelectedRow?.row
-            let selectedStock = stocks[selectedRow!]
+           let selectedSection = tableView.indexPathForSelectedRow?.section
+            let day = sortedStocks[selectedSection!]
+            let selectedStock = day[selectedRow!]
             destination.stocks = selectedStock
         }
     }
     
     
-    //Sections
-    
-    var sectionNames = ""
-    
-    
-    
+
     
     
     

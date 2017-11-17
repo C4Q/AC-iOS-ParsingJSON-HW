@@ -24,7 +24,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         self.tableView.delegate = self
         self.searchBar.delegate = self
         loadData()
-        dump(contact)
+
     }
     
     //loadData
