@@ -13,6 +13,9 @@
 		541D38141FBCDEA900F6A0A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */; };
 		541D381C1FBCDFAC00F6A0A9 /* applstockinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */; };
 		541D381E1FBCDFE100F6A0A9 /* userinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381D1FBCDFE100F6A0A9 /* userinfo.json */; };
+		8707D8D01FC0DB9000626AF4 /* contactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8707D8CF1FC0DB9000626AF4 /* contactDetailViewController.swift */; };
+		F44B2C9C1FBF8BFD0031AD61 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B2C9B1FBF8BFD0031AD61 /* ContactsViewController.swift */; };
+		F44B2C9E1FBF8CEA0031AD61 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B2C9D1FBF8CEA0031AD61 /* Contact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		541D38151FBCDEA900F6A0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = applstockinfo.json; sourceTree = "<group>"; };
 		541D381D1FBCDFE100F6A0A9 /* userinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userinfo.json; sourceTree = "<group>"; };
+		8707D8CF1FC0DB9000626AF4 /* contactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contactDetailViewController.swift; sourceTree = "<group>"; };
+		F44B2C9B1FBF8BFD0031AD61 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		F44B2C9D1FBF8CEA0031AD61 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,9 @@
 				541D380D1FBCDEA900F6A0A9 /* Main.storyboard */,
 				541D38101FBCDEA900F6A0A9 /* Assets.xcassets */,
 				541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */,
+				F44B2C9B1FBF8BFD0031AD61 /* ContactsViewController.swift */,
+				8707D8CF1FC0DB9000626AF4 /* contactDetailViewController.swift */,
+				F44B2C9D1FBF8CEA0031AD61 /* Contact.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -150,6 +159,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				541D380A1FBCDEA900F6A0A9 /* AppDelegate.swift in Sources */,
+				F44B2C9C1FBF8BFD0031AD61 /* ContactsViewController.swift in Sources */,
+				8707D8D01FC0DB9000626AF4 /* contactDetailViewController.swift in Sources */,
+				F44B2C9E1FBF8CEA0031AD61 /* Contact.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
