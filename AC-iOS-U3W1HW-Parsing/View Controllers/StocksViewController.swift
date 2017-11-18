@@ -87,20 +87,12 @@ class StocksViewController: UIViewController,UITableViewDelegate, UITableViewDat
         else {
             return
         }
+        
         let stocksInSection = self.stockBySection(thisIndexPath.section)
         let thisStock = stocksInSection[thisIndexPath.row]
-        let previousStock = stocksInSection[thisIndexPath.row - 1]
-        if thisIndexPath.row == 0 {
-            stockDestinationVC.todaysStock = thisStock
-            
-        }
-        else {
-            stockDestinationVC.todaysStock = thisStock
-            stockDestinationVC.yesterdaysStock = previousStock
-        }
+        stockDestinationVC.todaysStock = thisStock
+    
         
     }
     
-
-
 }

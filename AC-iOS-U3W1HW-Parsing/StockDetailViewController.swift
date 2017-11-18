@@ -20,26 +20,21 @@ class StockDetailViewController: UIViewController {
     @IBOutlet weak var stockImage: UIImageView!
     
     var todaysStock: Stock?
-    var yesterdaysStock: Stock?
-    
     func setImageAndBackground() {
         guard let todaysStock = todaysStock else {
             return
         }
-        dateLabel.text = todaysStock.date
-        openLabel.text = "open" + " " + todaysStock.open.description
-        closeLabel.text = "close" + " " + todaysStock.close.description
-        guard let yesterdaysStock = yesterdaysStock else {
-            return
-        }
-        if todaysStock.open > yesterdaysStock.open {
-            view.backgroundColor = UIColor.green
+        if todaysStock.close > todaysStock.open {
             stockImage.image = #imageLiteral(resourceName: "thumbsUp")
+            view.backgroundColor = UIColor.green
         }
-        else if yesterdaysStock.open > todaysStock.open {
-            view.backgroundColor = UIColor.red
+        else if todaysStock.close < todaysStock.open {
             stockImage.image = #imageLiteral(resourceName: "thumbsDown")
+            view.backgroundColor = UIColor.red
         }
+        dateLabel.text = todaysStock.date
+        openLabel.text = "open:" + " " + todaysStock.open.description
+        closeLabel.text = "close:" + " " + todaysStock.close.description
         
     }
     
@@ -52,6 +47,5 @@ class StockDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
-
 }
+
