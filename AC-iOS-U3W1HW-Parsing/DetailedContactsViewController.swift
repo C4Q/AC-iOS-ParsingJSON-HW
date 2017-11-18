@@ -10,6 +10,14 @@ import UIKit
 
 class DetailedContactsViewController: UIViewController {
 
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var labelOne: UILabel!
+    
+    @IBOutlet weak var labelTwo: UILabel!
+    
+    @IBOutlet weak var labelThree: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

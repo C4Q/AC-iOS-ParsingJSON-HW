@@ -16,6 +16,89 @@ class ContactsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    
+    /*
+     var contacts = [Person]()
+     func loadData() {
+     if let path = Bundle.main.path(forResource: "userinfo", ofType: "json") {
+     let myURL = URL(fileURLWithPath: path)
+     if let data = try? Data(contentsOf: myURL) {
+     let myDecoder = JSONDecoder()
+     do {
+     let contacts = try myDecoder.decode(contactTop.self, from: data)
+     self.contacts = contacts.results
+     }
+     catch let error {
+     print(error)
+     }
+     }
+     }
+     }
+     
+     var searchWord: String? {
+     didSet {
+     self.contactsTableView.reloadData()
+     }
+     }
+     
+     var filteredContactArr: [Person] {
+     guard let searchWord = searchWord, searchWord != "" else {
+     return contacts
+     }
+     return contacts.filter({ ($0.name.first + " " + $0.name.last).lowercased().contains(searchWord.lowercased())})
+     }
+     
+     
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     return filteredContactArr.count
+     }
+     
+     
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     contacts.sort(){$0.name.first < $1.name.first}
+     let contact = filteredContactArr[indexPath.row]
+     let cell = contactsTableView.dequeueReusableCell(withIdentifier: "Contact Cell", for: indexPath)
+     cell.textLabel?.text = contact.name.first.capitalized + " " + contact.name.last.capitalized
+     cell.detailTextLabel?.text = contact.location.city
+     if let pictureURL = URL(string: contact.picture.thumbnail) {
+     DispatchQueue.global().sync {
+     if let data = try? Data.init(contentsOf: pictureURL) {
+     DispatchQueue.main.async {
+     cell.imageView?.image = UIImage(data: data)
+     }
+     }
+     }
+     }
+     
+     return cell
+     }
+     
+     
+     
+     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+     self.searchWord = searchBar.text
+     searchBar.resignFirstResponder()
+     }
+     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+     self.searchWord = searchText
+     }
+     
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     if let destinationContact = segue.destination as? ContactDetailViewController {
+     let selectedRow = contactsTableView.indexPathForSelectedRow?.row
+     let selectedContact = filteredContactArr[selectedRow!]
+     destinationContact.myContact = selectedContact
+     }
+     }
+     
+     override func viewDidLoad() {
+     super.viewDidLoad()
+     loadData()
+     self.contactsTableView.delegate = self
+     self.contactsTableView.dataSource = self
+     self.searchBar.delegate = self
+     
+     // Do any additional setup after loading the view.
+     }
+ */
 
 }

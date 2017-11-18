@@ -106,10 +106,10 @@
             </objects>
             <point key="canvasLocation" x="436.875" y="-1290"/>
         </scene>
-        <!--View Controller-->
+        <!--Detailed Contacts View Controller-->
         <scene sceneID="2CJ-nx-Gbk">
             <objects>
-                <viewController id="AkH-aS-W1W" sceneMemberID="viewController">
+                <viewController id="AkH-aS-W1W" customClass="DetailedContactsViewController" customModule="AC_iOS_U3W1HW_Parsing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C9z-gz-TPL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -156,6 +156,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1E8-1Q-ZuK"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="lto-94-QeS" id="LyY-dR-tXZ"/>
+                        <outlet property="labelOne" destination="1jE-1a-25f" id="pe9-lO-sxv"/>
+                        <outlet property="labelThree" destination="Ymh-Fb-Rks" id="j6t-4K-l79"/>
+                        <outlet property="labelTwo" destination="OXD-iU-bql" id="Eyy-e6-K4f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IBc-Ae-3L3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -242,10 +248,10 @@
             </objects>
             <point key="canvasLocation" x="436.875" y="313.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Detailed Stock View Controller-->
         <scene sceneID="sWi-M1-vBM">
             <objects>
-                <viewController id="xcn-qO-LU5" sceneMemberID="viewController">
+                <viewController id="xcn-qO-LU5" customClass="DetailedStockViewController" customModule="AC_iOS_U3W1HW_Parsing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KC4-Ae-UlS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -292,6 +298,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="phe-QV-kOt"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="3t3-cz-OWZ" id="Z0e-ij-QYi"/>
+                        <outlet property="labelOne" destination="jvX-c4-k1J" id="kyZ-Ro-ntt"/>
+                        <outlet property="labelThree" destination="pl0-I4-dgn" id="VBk-py-EfK"/>
+                        <outlet property="labelTwo" destination="6aE-VI-aJj" id="94S-D1-sNh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KeB-kH-41V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

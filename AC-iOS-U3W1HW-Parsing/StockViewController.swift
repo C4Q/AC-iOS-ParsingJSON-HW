@@ -89,5 +89,18 @@ class StockViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let theNameOfThisSection = sectionNames[tableView.indexPathForSelectedRow!.row]
+        let stocksInThisSection = stockArr.filter {$0.sectionNameNeedAverage == theNameOfThisSection}
+        
+        if let destination = segue.destination as? DetailedStockViewController {
+            let selectedRow = self.tableView.indexPathForSelectedRow!.row
+            let selectedStock = stocksInThisSection[selectedRow]
+            destination.stock = selectedStock
+        }
+        
+        // Pass the selected object to the new view controller.
+    }
     
 }
