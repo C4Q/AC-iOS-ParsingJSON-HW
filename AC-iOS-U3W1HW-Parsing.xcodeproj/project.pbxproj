@@ -18,6 +18,7 @@
 		810BC2BB1FBE63A20086FEEE /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BC2BA1FBE63A20086FEEE /* Contacts.swift */; };
 		810BC2BD1FBE63B00086FEEE /* Stocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BC2BC1FBE63B00086FEEE /* Stocks.swift */; };
 		810BC2C01FBE7E400086FEEE /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810BC2BF1FBE7E400086FEEE /* ContactDetailViewController.swift */; };
+		81CED41B1FBF7A6D007D3CD8 /* StockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CED41A1FBF7A6D007D3CD8 /* StockDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		810BC2BA1FBE63A20086FEEE /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		810BC2BC1FBE63B00086FEEE /* Stocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stocks.swift; sourceTree = "<group>"; };
 		810BC2BF1FBE7E400086FEEE /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
+		81CED41A1FBF7A6D007D3CD8 /* StockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		541D38081FBCDEA900F6A0A9 /* AC-iOS-U3W1HW-Parsing */ = {
 			isa = PBXGroup;
 			children = (
+				81CED41A1FBF7A6D007D3CD8 /* StockDetailViewController.swift */,
 				810BC2BF1FBE7E400086FEEE /* ContactDetailViewController.swift */,
 				810BC2BE1FBE63B80086FEEE /* Models */,
 				810BC2B91FBE63790086FEEE /* View Controllers */,
@@ -182,6 +185,7 @@
 			files = (
 				810BC2BB1FBE63A20086FEEE /* Contacts.swift in Sources */,
 				810BC2B81FBE634E0086FEEE /* StocksViewController.swift in Sources */,
+				81CED41B1FBF7A6D007D3CD8 /* StockDetailViewController.swift in Sources */,
 				541D380A1FBCDEA900F6A0A9 /* AppDelegate.swift in Sources */,
 				810BC2B61FBE63410086FEEE /* ContactsViewController.swift in Sources */,
 				810BC2C01FBE7E400086FEEE /* ContactDetailViewController.swift in Sources */,

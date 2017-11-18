@@ -42,8 +42,7 @@ class ContactsViewController: UIViewController,UITableViewDelegate, UITableViewD
         guard let searchWord = searchWord, searchWord != "" else {
             return contacts
         }
-        return contacts.filter({$0.name.first.lowercased().contains(searchWord.lowercased())
-            || $0.name.last.lowercased().contains(searchWord.lowercased())})
+        return contacts.filter({ ($0.name.first + " " + $0.name.last).lowercased().contains(searchWord.lowercased())})
     }
     
     
@@ -51,15 +50,28 @@ class ContactsViewController: UIViewController,UITableViewDelegate, UITableViewD
         return filteredContactArr.count
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         contacts.sort(){$0.name.first < $1.name.first}
         let contact = filteredContactArr[indexPath.row]
         let cell = contactsTableView.dequeueReusableCell(withIdentifier: "Contact Cell", for: indexPath)
         cell.textLabel?.text = contact.name.first.capitalized + " " + contact.name.last.capitalized
         cell.detailTextLabel?.text = contact.location.city
+        if let pictureURL = URL(string: contact.picture.thumbnail) {
+            DispatchQueue.global().sync {
+                if let data = try? Data.init(contentsOf: pictureURL) {
+                    DispatchQueue.main.async {
+                        cell.imageView?.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+       
         return cell
     }
     
+    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchWord = searchBar.text
         searchBar.resignFirstResponder()
@@ -89,3 +101,7 @@ class ContactsViewController: UIViewController,UITableViewDelegate, UITableViewD
 
 
 }
+
+
+
+
