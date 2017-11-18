@@ -28,7 +28,7 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         var sortedDates: Set<String> = []
-
+        
         
         for dates in stocks {
             var dateString = ""
@@ -46,21 +46,21 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
             
             
             
-           sortedDates.insert(dateString)
+            sortedDates.insert(dateString)
             
         }
-
+        
         
         var sortedDateArr = [String]()
         
         sortedDateArr.append(contentsOf: sortedDates)
         sortedDateArr.sort()
-
+        
         
         for dates in sortedDateArr {
             sortedStocks.append(stocks.filter{$0.date.contains(dates)})
         }
-    
+        
     }
     
     func loadData(){
@@ -77,7 +77,7 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     func numberOfSections(in tableView: UITableView) -> Int {
         return sortedStocks.count
     }
-  
+    
     
     
     //Sections
@@ -102,12 +102,18 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-
+        
         var dateTitle = ""
         var counter = 0
-        var stockDateArray = sortedStocks[section]
+        let stockDateArray = sortedStocks[section]
+        let modelDate = stockDateArray.first?.date
+        var averageOpens = 0.0
         
-        var modelDate = stockDateArray.first?.date
+        for opens in stockDateArray {
+            averageOpens += opens.open
+//        averageOpens = averageOpens / Double(stockDateArray.count)
+     
+        }
         
         
         for date in modelDate! {
@@ -118,8 +124,8 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
                 break
             }
         }
-
-        return dateTitle
+        
+        return "\(dateTitle)  \(averageOpens) "
     }
     
     
@@ -129,7 +135,7 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailedStocksViewController {
             let selectedRow = tableView.indexPathForSelectedRow?.row
-           let selectedSection = tableView.indexPathForSelectedRow?.section
+            let selectedSection = tableView.indexPathForSelectedRow?.section
             let day = sortedStocks[selectedSection!]
             let selectedStock = day[selectedRow!]
             destination.stocks = selectedStock
@@ -137,7 +143,7 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
-
+    
     
     
     
