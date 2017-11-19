@@ -57,7 +57,7 @@
                         <constraints>
                             <constraint firstItem="jI6-NT-Ik5" firstAttribute="leading" secondItem="M1v-V5-VYo" secondAttribute="leading" id="8Pi-zL-zeE"/>
                             <constraint firstItem="M1v-V5-VYo" firstAttribute="trailing" secondItem="jI6-NT-Ik5" secondAttribute="trailing" id="K9m-So-2Um"/>
-                            <constraint firstItem="jI6-NT-Ik5" firstAttribute="top" secondItem="M1v-V5-VYo" secondAttribute="top" id="WOo-0I-GJO"/>
+                            <constraint firstItem="jI6-NT-Ik5" firstAttribute="top" secondItem="M1v-V5-VYo" secondAttribute="top" id="ego-Ay-K1t"/>
                             <constraint firstItem="M1v-V5-VYo" firstAttribute="bottom" secondItem="jI6-NT-Ik5" secondAttribute="bottom" id="hy1-KV-HaC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="M1v-V5-VYo"/>
@@ -65,11 +65,20 @@
                     <navigationItem key="navigationItem" title="Contacts" id="ZUi-FF-uBE"/>
                     <connections>
                         <outlet property="contactsTableView" destination="jI6-NT-Ik5" id="Ub7-mv-GZ2"/>
+                        <outlet property="searchDisplayController" destination="1Eh-sW-c8o" id="j4C-0v-BFN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7C-2U-Xgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="1Eh-sW-c8o">
+                    <connections>
+                        <outlet property="delegate" destination="MIR-2p-7qT" id="yUg-Yb-sLV"/>
+                        <outlet property="searchContentsController" destination="MIR-2p-7qT" id="wMD-rd-9Gi"/>
+                        <outlet property="searchResultsDataSource" destination="MIR-2p-7qT" id="Z8h-ii-Ijf"/>
+                        <outlet property="searchResultsDelegate" destination="MIR-2p-7qT" id="cJe-29-TvW"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-1271" y="835"/>
+            <point key="canvasLocation" x="-1271.2" y="834.33283358320841"/>
         </scene>
         <!--Contact Detail View Controller-->
         <scene sceneID="ajW-u4-38G">

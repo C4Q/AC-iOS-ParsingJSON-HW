@@ -16,6 +16,7 @@ class contactDetailViewController: UIViewController {
     
     var selectedContact: Contact? = nil
     
+    // MARK: - Override Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
@@ -37,15 +38,15 @@ class contactDetailViewController: UIViewController {
         for label in contactLabels {
             switch label.tag {
             case 0:
-                label.text = "First: \(selectedContact.name.first)"
+                label.text = "First: \(selectedContact.name.firstNameFormatted)"
             case 1:
-                label.text = "Last: \(selectedContact.name.last)"
+                label.text = "Last: \(selectedContact.name.lastNameFormatted)"
             case 2:
                 label.text = "Cell: \(selectedContact.cell)"
             case 3:
                 label.text = "E-mail: \(selectedContact.email)"
             case 4:
-                label.text = "Birthday: \(selectedContact.dob)"
+                label.text = "Birthday: \(selectedContact.birthday)"
             case 5:
                 label.text = "Street: \(selectedContact.location.street)"
             case 6:

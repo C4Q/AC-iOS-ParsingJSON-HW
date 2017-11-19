@@ -20,10 +20,16 @@ class ContactsViewController: UIViewController {
         super.viewDidLoad()
         contactsTableView.dataSource = self
         getContactData()
-        
+        setupNavBar()
     }
     
     // MARK: functions
+    func setupNavBar() {
+        let searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController = searchController
+        
+    }
+    
     func getContactData() {
         guard let path = Bundle.main.path(forResource: "userinfo", ofType: "json") else { return }
         let myURL = URL(fileURLWithPath: path)
@@ -37,25 +43,8 @@ class ContactsViewController: UIViewController {
             print(error)
         }
     }
+    
 }
-
-
-//func getContactData() {
-//    if let path = Bundle.main.path(forResource: "userinfo", ofType: "json") {
-//        let myURL = URL(fileURLWithPath: path)
-//        if let data = try? Data(contentsOf: myURL) {
-//            let myDecoder = JSONDecoder()
-//            do {
-//                let contacts = try myDecoder.decode(ContactInfo.self, from: data)
-//                self.contacts = contacts.results
-//            }
-//            catch {
-//                print(error)
-//            }
-//        }
-//    }
-//}
-//}
 
 //MARK: tableView - data source methods
 extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -66,7 +55,7 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
         let contact = contacts[indexPath.row]
-        cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
+        cell.textLabel?.text = "\(contact.name.fullName)"
         cell.detailTextLabel?.text = contact.location.city
         return cell
     }
@@ -76,4 +65,8 @@ extension ContactsViewController: UITableViewDataSource, UITableViewDelegate {
             destination.selectedContact = contacts[contactsTableView.indexPathForSelectedRow!.row]
         }
     }
+}
+
+extension ContactsViewController: UISearchBarDelegate {
+    
 }
