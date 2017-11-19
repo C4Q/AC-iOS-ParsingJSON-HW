@@ -15,13 +15,13 @@ class StockViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var sectionNames = [String]()
     
     func stockThatMonth(_ section: Int) -> [Stock] {
-        return stockArr.filter { $0.sectionNameNeedAverage == sectionNames[section]}
+        return stockArr.filter { $0.theSectionNames == sectionNames[section]}
     }
     
     func getSectionNames() {
         for stocks in stockArr {
-            if !sectionNames.contains(stocks.sectionNameNeedAverage) {
-                sectionNames.append(stocks.sectionNameNeedAverage)
+            if !sectionNames.contains(stocks.theSectionNames) {
+                sectionNames.append(stocks.theSectionNames)
             }
         }
         print(sectionNames)
@@ -54,7 +54,7 @@ class StockViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         let theNameOfThisSection = sectionNames[section]
-        let stocksInThisSection = stockArr.filter {$0.sectionNameNeedAverage == theNameOfThisSection}
+        let stocksInThisSection = stockArr.filter {$0.theSectionNames == theNameOfThisSection}
         var total = 0.0
         
         for stock in stocksInThisSection {
@@ -72,7 +72,7 @@ class StockViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         let theNameOfThisSection = sectionNames[section]
-        let stocksInThisSection = stockArr.filter {$0.sectionNameNeedAverage == theNameOfThisSection}
+        let stocksInThisSection = stockArr.filter {$0.theSectionNames == theNameOfThisSection}
         return stocksInThisSection.count
         
     }
@@ -80,7 +80,7 @@ class StockViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath)
 
         let theNameOfThisSection = sectionNames[indexPath.section]
-        let stocksInThisSection = stockArr.filter {$0.sectionNameNeedAverage == theNameOfThisSection}
+        let stocksInThisSection = stockArr.filter {$0.theSectionNames == theNameOfThisSection}
         
         let oneDayOfStock = stocksInThisSection[indexPath.row]
         
@@ -92,7 +92,7 @@ class StockViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let theNameOfThisSection = sectionNames[tableView.indexPathForSelectedRow!.row]
-        let stocksInThisSection = stockArr.filter {$0.sectionNameNeedAverage == theNameOfThisSection}
+        let stocksInThisSection = stockArr.filter {$0.theSectionNames == theNameOfThisSection}
         
         if let destination = segue.destination as? DetailedStockViewController {
             let selectedRow = self.tableView.indexPathForSelectedRow!.row

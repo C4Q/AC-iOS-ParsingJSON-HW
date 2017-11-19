@@ -14,7 +14,7 @@ class Stock {
     var close: Double
     var change: Double
     
-    var sectionNameNeedAverage: String {
+    var theSectionNames: String {
         var dateAsArr = date.split(separator: "-")
         let year = dateAsArr[0]
         let month = String(dateAsArr[1])

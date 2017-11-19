@@ -138,6 +138,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label4" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xoh-qI-qgR">
+                                <rect key="frame" x="20" y="354.5" width="280" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -147,17 +153,21 @@
                             <constraint firstItem="Ymh-Fb-Rks" firstAttribute="centerX" secondItem="C9z-gz-TPL" secondAttribute="centerX" id="QvF-eP-byh"/>
                             <constraint firstItem="1jE-1a-25f" firstAttribute="centerX" secondItem="C9z-gz-TPL" secondAttribute="centerX" id="Rwr-RZ-zCL"/>
                             <constraint firstItem="Ymh-Fb-Rks" firstAttribute="width" secondItem="OXD-iU-bql" secondAttribute="width" id="SeB-kD-k9a"/>
+                            <constraint firstItem="Xoh-qI-qgR" firstAttribute="centerX" secondItem="1E8-1Q-ZuK" secondAttribute="centerX" id="bp8-fQ-cEx"/>
                             <constraint firstItem="Ymh-Fb-Rks" firstAttribute="top" secondItem="OXD-iU-bql" secondAttribute="bottom" constant="10" id="die-LQ-FA0"/>
                             <constraint firstItem="1jE-1a-25f" firstAttribute="top" secondItem="lto-94-QeS" secondAttribute="bottom" constant="20" id="gvD-KC-JFu"/>
                             <constraint firstItem="1jE-1a-25f" firstAttribute="width" secondItem="lto-94-QeS" secondAttribute="width" id="lLf-bK-uX2"/>
                             <constraint firstItem="lto-94-QeS" firstAttribute="leading" secondItem="1E8-1Q-ZuK" secondAttribute="leading" constant="20" id="lf2-pU-Vas"/>
                             <constraint firstItem="OXD-iU-bql" firstAttribute="top" secondItem="1jE-1a-25f" secondAttribute="bottom" constant="10" id="ntM-Ww-LQI"/>
                             <constraint firstItem="OXD-iU-bql" firstAttribute="centerX" secondItem="C9z-gz-TPL" secondAttribute="centerX" id="rIE-Em-0Jd"/>
+                            <constraint firstItem="Xoh-qI-qgR" firstAttribute="top" secondItem="Ymh-Fb-Rks" secondAttribute="bottom" constant="10" id="tDd-Hv-ehJ"/>
+                            <constraint firstItem="Xoh-qI-qgR" firstAttribute="width" secondItem="1jE-1a-25f" secondAttribute="width" id="wGO-yH-o3U"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1E8-1Q-ZuK"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="lto-94-QeS" id="LyY-dR-tXZ"/>
+                        <outlet property="labelFour" destination="Xoh-qI-qgR" id="rcF-aw-Frm"/>
                         <outlet property="labelOne" destination="1jE-1a-25f" id="pe9-lO-sxv"/>
                         <outlet property="labelThree" destination="Ymh-Fb-Rks" id="j6t-4K-l79"/>
                         <outlet property="labelTwo" destination="OXD-iU-bql" id="Eyy-e6-K4f"/>
@@ -165,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IBc-Ae-3L3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1553" y="314"/>
+            <point key="canvasLocation" x="1552.5" y="313.75"/>
         </scene>
         <!--Contact-->
         <scene sceneID="dTx-aZ-Yjz">
@@ -243,6 +253,10 @@
                         <viewLayoutGuide key="safeArea" id="z27-Za-a8h"/>
                     </view>
                     <navigationItem key="navigationItem" id="cXs-hH-oYw"/>
+                    <connections>
+                        <outlet property="contactsTableView" destination="Kdh-oC-aOv" id="unF-rz-oVB"/>
+                        <outlet property="searchBar" destination="x5N-6s-1OX" id="5Sz-RQ-Q0O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ccs-tp-SvN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -287,11 +301,13 @@
                             <constraint firstItem="pl0-I4-dgn" firstAttribute="width" secondItem="jvX-c4-k1J" secondAttribute="width" id="2h0-fb-7zl"/>
                             <constraint firstItem="6aE-VI-aJj" firstAttribute="leading" secondItem="KC4-Ae-UlS" secondAttribute="leading" id="2ue-k1-Xfi"/>
                             <constraint firstItem="jvX-c4-k1J" firstAttribute="centerX" secondItem="phe-QV-kOt" secondAttribute="centerX" id="5OM-IV-sch"/>
+                            <constraint firstItem="pl0-I4-dgn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6aE-VI-aJj" secondAttribute="trailing" constant="8" symbolic="YES" id="5bD-oI-8Ms"/>
                             <constraint firstItem="6aE-VI-aJj" firstAttribute="width" secondItem="jvX-c4-k1J" secondAttribute="width" id="8jE-yi-cTb"/>
                             <constraint firstItem="3t3-cz-OWZ" firstAttribute="width" secondItem="KC4-Ae-UlS" secondAttribute="width" multiplier="0.9" id="Kaa-8e-c42"/>
                             <constraint firstAttribute="trailing" secondItem="pl0-I4-dgn" secondAttribute="trailing" id="LiB-jr-qDN"/>
                             <constraint firstItem="3t3-cz-OWZ" firstAttribute="centerX" secondItem="KC4-Ae-UlS" secondAttribute="centerX" id="O8i-3F-lWK"/>
                             <constraint firstItem="3t3-cz-OWZ" firstAttribute="centerY" secondItem="KC4-Ae-UlS" secondAttribute="centerY" id="T8G-Fe-Smz"/>
+                            <constraint firstItem="pl0-I4-dgn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6aE-VI-aJj" secondAttribute="trailing" constant="8" symbolic="YES" id="VYw-Ld-evh"/>
                             <constraint firstItem="jvX-c4-k1J" firstAttribute="width" secondItem="3t3-cz-OWZ" secondAttribute="width" multiplier="0.5" id="XhF-vy-bXN"/>
                             <constraint firstItem="jvX-c4-k1J" firstAttribute="centerY" secondItem="phe-QV-kOt" secondAttribute="centerY" multiplier="0.4" id="ZhA-Ft-02c"/>
                             <constraint firstItem="6aE-VI-aJj" firstAttribute="centerY" secondItem="phe-QV-kOt" secondAttribute="centerY" multiplier="1.5" id="cYS-Lv-Ecl"/>
