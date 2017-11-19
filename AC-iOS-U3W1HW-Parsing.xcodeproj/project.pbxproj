@@ -13,6 +13,9 @@
 		541D38141FBCDEA900F6A0A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */; };
 		541D381C1FBCDFAC00F6A0A9 /* applstockinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */; };
 		541D381E1FBCDFE100F6A0A9 /* userinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381D1FBCDFE100F6A0A9 /* userinfo.json */; };
+		D2BF9B701FBF9C2E00F1B08A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BF9B6F1FBF9C2E00F1B08A /* User.swift */; };
+		D2BF9B721FBFA88700F1B08A /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BF9B711FBFA88700F1B08A /* UserListViewController.swift */; };
+		D2BF9B741FC2073300F1B08A /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BF9B731FC2073300F1B08A /* UserDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		541D38151FBCDEA900F6A0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = applstockinfo.json; sourceTree = "<group>"; };
 		541D381D1FBCDFE100F6A0A9 /* userinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userinfo.json; sourceTree = "<group>"; };
+		D2BF9B6F1FBF9C2E00F1B08A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D2BF9B711FBFA88700F1B08A /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		D2BF9B731FC2073300F1B08A /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +48,9 @@
 			children = (
 				541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */,
 				541D381D1FBCDFE100F6A0A9 /* userinfo.json */,
+				D2BF9B6F1FBF9C2E00F1B08A /* User.swift */,
+				D2BF9B711FBFA88700F1B08A /* UserListViewController.swift */,
+				D2BF9B731FC2073300F1B08A /* UserDetailViewController.swift */,
 				541D38081FBCDEA900F6A0A9 /* AC-iOS-U3W1HW-Parsing */,
 				541D38071FBCDEA900F6A0A9 /* Products */,
 			);
@@ -149,7 +158,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BF9B701FBF9C2E00F1B08A /* User.swift in Sources */,
 				541D380A1FBCDEA900F6A0A9 /* AppDelegate.swift in Sources */,
+				D2BF9B741FC2073300F1B08A /* UserDetailViewController.swift in Sources */,
+				D2BF9B721FBFA88700F1B08A /* UserListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
