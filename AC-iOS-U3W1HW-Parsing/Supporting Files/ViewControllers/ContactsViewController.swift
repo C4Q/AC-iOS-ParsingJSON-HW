@@ -94,7 +94,6 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
             let selectedRow = tableView.indexPathForSelectedRow!.row
             let selectedContact = filteredArr[selectedRow]
             destination.selectedContact = selectedContact
-            
         }
     }
     
