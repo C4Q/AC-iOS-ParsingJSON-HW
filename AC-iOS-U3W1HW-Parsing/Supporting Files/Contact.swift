@@ -1,7 +1,7 @@
 //  Contact.swift
 //  AC-iOS-U3W1HW-Parsing
 //  Created by Winston Maragh on 11/16/17.
-//  Copyright © 2017 Winston Maragh . All rights reserved.
+//  Copyright © 2017 Winston Maragh. All rights reserved.
 
 import Foundation
 
@@ -26,6 +26,9 @@ struct NameWrapper: Codable {
 	let title: String
 	let first: String
 	let last: String
+	var fullName: String {
+		return first.capitalized + " " + last.capitalized
+	}
 }
 
 struct LocationWrapper: Codable {

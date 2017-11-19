@@ -1,7 +1,7 @@
 //  AppleVC.swift
 //  AC-iOS-U3W1HW-Parsing
-//  Created by C4Q on 11/16/17.
-//  Copyright © 2017 C4Q . All rights reserved.
+//  Created by Winston Maragh on 11/16/17.
+//  Copyright © 2017 Winston Maragh. All rights reserved.
 
 import UIKit
 
@@ -10,64 +10,97 @@ class StocksVC: UIViewController, UITableViewDelegate {
 	//MARK: - Outlets
 	@IBOutlet weak var stockTableView: UITableView!
 	
-	//MARK: - Variables/Constants
-	var stocks = [Stock]()
-
 	//MARK: - Overrides
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		stockTableView.dataSource = self
-		stockTableView.delegate = self
-		loadStockData()
+		getStockData()
 	}
 	
+	//MARK: - Variables/Constants
+	var stocks = [Stock]()
+	var stocksSectionHeaders: [String] = []
+	var avgOpenStr = ""
+	
 	//MARK: - Functions
-	func loadStockData() {
+	func getStockData() {
 		if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json") {
-			let myURL = URL(fileURLWithPath: path)
-			if let data = try? Data(contentsOf: myURL) {				
+			let url = URL(fileURLWithPath: path)
+			if let data = try? Data(contentsOf: url) {
 				let stocks = Stock.getStocks(from: data).sorted { $0.date > $1.date }
 				self.stocks = stocks
+				self.getStocksSectionHeaders()
+						DispatchQueue.main.async {
+							self.stockTableView.reloadData()
+						}
 			}
 		}
 	}
 	
-	//MARK: - Navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if let destination = segue.destination as? StocksDVC {
-			let row = stockTableView.indexPathForSelectedRow!.row
-			destination.stock = stocks[row]
+}
+
+//MARK: - Section Headers
+extension StocksVC {
+	func getStocksSectionHeaders() {
+		for currentStock in stocks {
+			if !stocksSectionHeaders.contains(currentStock.sectionHeader){
+				stocksSectionHeaders.append(currentStock.sectionHeader)
+			}
 		}
 	}
+	
+	func stocksSection(_ section: Int) -> [Stock] {
+		return stocks.filter { $0.sectionHeader == stocksSectionHeaders[section] }
+	}
 }
 
-//MARK: - tableView - Data Source Methods
+//MARK: - stocksTableView - DataSource Methods
 extension StocksVC: UITableViewDataSource {
-
-	
-	/*
-	func numberOfSections(in tableView: UITableView) -> Int {
-			return months.count
-	}
-	*/
-	
-	/*
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-	
-	}
-	*/
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return stocks.count //
+	func numberOfSections(in stockTableView: UITableView) -> Int {
+		return stocksSectionHeaders.count //25
 	}
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let stock = stocks[indexPath.row]
-		let cell = self.stockTableView.dequeueReusableCell(withIdentifier: "Stock Cell", for: indexPath)
-		cell.textLabel?.text = stock.date
-		cell.detailTextLabel?.text = String(stock.close)
+	func tableView(_ stockTableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		var temp = [Float]()
+		var total: Float = 0
+		let sectionStocks = stocks.filter { $0.sectionHeader == stocksSectionHeaders[section] }
+		var counter = 0
+		for currentStock in sectionStocks {
+			counter += 1
+			temp.append(currentStock.open)
+		}
+		for value in temp {
+			total += value
+		}
+		avgOpenStr = String(format:"Avg: $%.2f", (total/Float(counter)))
+		counter = 0
+		return ("\(stocksSectionHeaders[section]) - \(avgOpenStr)")
+	}
+	
+	func tableView(_ stockTableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return stocksSection(section).count
+	}
+	
+	func tableView(_ stockTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = stockTableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath)
+		let currentSection = stocksSection(indexPath.section)
+		let currentStock = currentSection[indexPath.row]
+		cell.textLabel?.text = currentStock.date
+		cell.detailTextLabel?.text = String(format:"Open: $%.2f", currentStock.open)
 		return cell
 	}
-	
 }
 
+//MARK: - Navigation - Segue
+extension StocksVC {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		guard
+			let destinationDVC = segue.destination as? StocksDVC,
+			let stockCell = sender as? UITableViewCell,
+			let currentIndexPath = stockTableView.indexPath(for: stockCell)
+			else {return}
+		let stocksSection = self.stocksSection(currentIndexPath.section)
+		let currentStock = stocksSection[currentIndexPath.row]
+		destinationDVC.stock = currentStock
+	}
+}

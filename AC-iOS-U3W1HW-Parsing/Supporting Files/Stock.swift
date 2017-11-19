@@ -1,55 +1,94 @@
 //  Stock.swift
 //  AC-iOS-U3W1HW-Parsing
-//  Created by C4Q on 11/16/17.
-//  Copyright © 2017 C4Q . All rights reserved.
+//  Created by Winston Maragh on 11/16/17.
+//  Copyright © 2017 Winston Maragh. All rights reserved.
 
 import Foundation
 
 class Stock {
-	let date: String //"2015-11-11"
-	let open: Double //116.37,
-	let close: Double //116.11
-	let change: Double //-0.66
-	let label: String
+	let date: String
+	let open: Float
+	let close:Float
+	let low: Float
+	let high: Float
+	let volume: Int
+	
+	var sectionHeader: String { return monthYear }
+	
+	var monthYear: String {
+		enum Month: Int {
+			case January = 01, February, March, April, May, June, July, August, September, October, November, December
+		}
+		let year: String = String(date[date.index(date.startIndex, offsetBy: 0)..<date.index(date.endIndex, offsetBy: -6)])
+		let month = Int((date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.endIndex, offsetBy: -3)]))
+		return "\(Month.init(rawValue: month!)!) \(year)"
+	}
+	
+	/*
+	var monthYear: String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "YYYY-MM-DD"
+		let inputDate = dateFormatter.date(from: date)
+		dateFormatter.dateFormat = "MMMM, YYYY"
+		let monthYear = dateFormatter.string(from: inputDate!)
+		return monthYear
+	}
 
-	init(date: String, open: Double, close: Double, change: Double, label: String) {
+	var shortDate: String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "YYYY-MM-DD"
+		let inputDate = dateFormatter.date(from: date)
+		dateFormatter.dateFormat = "MMM dd, YYYY"
+		let shortDate = dateFormatter.string(from: inputDate!)
+		return shortDate
+	}
+	
+	var longDate: String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "YYYY-MM-DD"
+		let inputDate = dateFormatter.date(from: date)
+		dateFormatter.dateFormat = "MMM dd, YYYY"
+		let longDate = dateFormatter.string(from: inputDate!)
+		return longDate
+	}
+	*/
+	
+	init(date: String, open: Float, close: Float, low: Float, high: Float, volume: Int) {
 		self.date = date
 		self.open = open
 		self.close = close
-		self.change = change
-		self.label = label
+		self.low = low
+		self.high = high
+		self.volume = volume
 	}
 	
 	convenience init?(from jsonDict: [String: Any]) {
 		guard
 			let date = jsonDict["date"] as? String,
-			let open = jsonDict["open"] as? Double,
-			let close = jsonDict["close"] as? Double,
-			let change = jsonDict["change"] as? Double,
-			let label = jsonDict["label"] as? String
+			let open = jsonDict["open"] as? Float,
+			let close = jsonDict["close"] as? Float,
+			let low = jsonDict["low"] as? Float,
+			let high = jsonDict["high"] as? Float,
+			let volume = jsonDict["volume"] as? Int
 		else {
 			return nil
 		}
-		self.init(date: date, open: open, close: close, change: change, label: label)
-	} //end of Convenience init
+		self.init(date: date, open: open, close: close, low: low, high: high, volume: volume)
+	}
 	
 	static func getStocks(from data: Data) -> [Stock] {
 		var stocks = [Stock]()
 		do {
-			let json = try JSONSerialization.jsonObject(with: data, options: []) //json is now an arra of dictionary
-			if let stockDictArray = json as? [[String:Any]] {
-				for stockDict in stockDictArray {
-					if let stock = Stock(from: stockDict) {
-						stocks.append(stock)
-					}
+			guard let stocksJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [[String:Any]] else {return []}
+			for stockDict in stocksJSON {
+				if let stock = Stock(from: stockDict) {
+					stocks.append(stock)
 				}
 			}
 		}
 		catch {
-			print("Error converting data to JSON")
+			print(error)
 		}
 		return stocks
 	}
-	
 }
-

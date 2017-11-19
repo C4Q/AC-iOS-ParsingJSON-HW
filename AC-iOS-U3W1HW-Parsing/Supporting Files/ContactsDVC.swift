@@ -26,12 +26,12 @@ class ContactsDVC: UIViewController {
 
 	//MARK: - Functions
 	func loadData() {
-		fullnameLabel.text = "\(contact.name.first) \(contact.name.last)"
+		fullnameLabel.text = "\(contact.name.fullName)"
 		addressLabel.text =  contact.location.street
 		cityStateLabel.text = "\(contact.location.city) \(contact.location.state)"
 		phoneNumberLabel.text = contact.phone
 		emailLabel.text = contact.email
-		//set image
+		//load image
 		if let url = URL(string: contact.picture.large) {
 			personImageView.contentMode = .scaleAspectFit
 			//doing work on a background thread - to avoid crashing the phone

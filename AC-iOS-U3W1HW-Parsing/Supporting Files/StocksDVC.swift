@@ -1,7 +1,7 @@
 //  StockDVC.swift
 //  AC-iOS-U3W1HW-Parsing
-//  Created by C4Q on 11/16/17.
-//  Copyright © 2017 C4Q . All rights reserved.
+//  Created by Winston Maragh on 11/16/17.
+//  Copyright © 2017 Winston Maragh. All rights reserved.
 
 import UIKit
 
@@ -12,11 +12,13 @@ class StocksDVC: UIViewController {
 	@IBOutlet weak var stockOpen: UILabel!
 	@IBOutlet weak var stockClose: UILabel!
 	@IBOutlet weak var thumbsImage: UIImageView!
+	@IBOutlet weak var stockRange: UILabel!
+	@IBOutlet weak var stockVolume: UILabel!
 	
 	//Variables/Constants
-	var stock: Stock?
+	var stock: Stock!
 	
-	//Mark: - Override
+	//Mark: - Overrides
     override func viewDidLoad() {
 		super.viewDidLoad()
 		loadData()
@@ -27,13 +29,13 @@ class StocksDVC: UIViewController {
 		loadData()
 	}
 	
-	//Actions
 	func loadData() {
-		//set labels - date, open, close, image, background color (view.backgroundColor)
-		stockDate.text = stock?.date
-		stockOpen.text = "Open: \(stock!.open.description)"
-		stockClose.text = "Close \(stock!.close.description)"
-		if (stock!.close) - (stock!.open) < 0.0 {
+		stockDate.text = stock.date
+		stockOpen.text = String(format:"Open: $%.2f", stock.open)
+		stockClose.text = String(format:"Close: $%.2f", stock.close)
+		stockVolume.text = "Volume: \(stock.volume)"
+		stockRange.text = String(format:"Range: $%.2f - $%.2f", stock.low, stock.high)
+		if (stock!.close) - (stock.open) > 0.0 {
 			view.backgroundColor = UIColor.green
 			thumbsImage.image = #imageLiteral(resourceName: "thumbsUp")
 		} else {
@@ -43,6 +45,3 @@ class StocksDVC: UIViewController {
 	}
 	
 }
-
-
-

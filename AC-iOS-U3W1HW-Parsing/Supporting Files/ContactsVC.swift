@@ -1,7 +1,7 @@
 //  ContactsVC.swift
 //  AC-iOS-U3W1HW-Parsing
-//  Created by C4Q on 11/16/17.
-//  Copyright © 2017 C4Q . All rights reserved.
+//  Created by Winston Maragh on 11/16/17.
+//  Copyright © 2017 Winston Maragh. All rights reserved.
 
 import UIKit
 
@@ -13,6 +13,7 @@ class ContactsVC: UIViewController {
 
 	//MARK: - Variables/Constants
 	var contacts = [Contact]()
+	var organizedContacts: [Contact] { return contacts.sorted { $0.name.first < $1.name.first } }
 
 	//Mark: - Overrides
 	override func viewDidLoad() {
@@ -32,11 +33,11 @@ class ContactsVC: UIViewController {
 	//MARK: - Functions
 	func loadContactData() {
 		if let path = Bundle.main.path(forResource: "userinfo", ofType: "json") {
-			let myURL = URL(fileURLWithPath: path)
-			if let data = try? Data(contentsOf: myURL) {
+			let url = URL(fileURLWithPath: path)
+			if let data = try? Data(contentsOf: url) {
 				do {
-					let results = try JSONDecoder().decode(ContactResultsWrapper.self, from: data)
-					self.contacts = results.results
+					let contacts = try JSONDecoder().decode(ContactResultsWrapper.self, from: data)
+					self.contacts = contacts.results
 				}
 				catch {
 					print(error)
@@ -55,8 +56,20 @@ extension ContactsVC: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ contactsTableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let contact = filteredContacts[indexPath.row]
 		let cell = self.contactsTableView.dequeueReusableCell(withIdentifier: "Contact Cell", for: indexPath)
-		cell.textLabel?.text = "\(contact.name.first) \(contact.name.last)"
+		cell.textLabel?.text = contact.name.fullName
 		cell.detailTextLabel?.text = contact.location.city
+		//load image
+		if let url = URL(string: contact.picture.thumbnail) {
+			//doing work on a background thread - to avoid crashing the phone
+			DispatchQueue.global().sync {
+				if let data = try? Data.init(contentsOf: url) {
+					//go back to main thread to update UI
+					DispatchQueue.main.async {
+						cell.imageView?.image = UIImage(data: data)
+					}
+				}
+			}
+		}
 		return cell
 	}
 	
@@ -64,23 +77,19 @@ extension ContactsVC: UITableViewDataSource, UITableViewDelegate {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let destination = segue.destination as? ContactsDVC {
 			let row = contactsTableView.indexPathForSelectedRow!.row
-			destination.contact = self.contacts[row]
+			destination.contact = self.organizedContacts[row]
 		}
 	}
 }
 
 //MARK: - Search Bar
 extension ContactsVC: UISearchBarDelegate {
-	var organizedContacts: [Contact] {
-		return contacts.sorted { $0.name.first < $1.name.first }
-	}
-	
 	var filteredContacts: [Contact] {
 		guard let searchTerm = searchTerm, searchTerm != "" else {
 			return organizedContacts
 		}
 		return organizedContacts.filter {(contact) in
-			contact.name.first.lowercased().contains(searchTerm.lowercased()) || contact.name.last.lowercased().contains(searchTerm.lowercased())
+			contact.name.fullName.lowercased().contains(searchTerm.lowercased())
 		}
 	}
 	
