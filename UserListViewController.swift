@@ -54,7 +54,7 @@ func loadData() {
         if segue.identifier == "usersegue" {
             print("segue works")
             if let destination = segue.destination as? UserDetailViewController {
-                destination.userDetail = [users[tableView.indexPathForSelectedRow!.row]]
+                destination.userDetail = users[tableView.indexPathForSelectedRow!.row]
             }
         }
     }

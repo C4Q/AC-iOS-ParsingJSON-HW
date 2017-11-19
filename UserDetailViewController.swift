@@ -9,7 +9,7 @@
 import UIKit
 
 class UserDetailViewController: UIViewController {
-    var userDetail = [ResultsWrapper]()
+    var userDetail: ResultsWrapper?
    
     @IBOutlet weak var nameLabel: UILabel!
     
