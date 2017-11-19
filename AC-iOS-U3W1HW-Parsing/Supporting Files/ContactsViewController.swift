@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ContactsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ContactsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    
     @IBOutlet weak var contactsSearchBar: UISearchBar!
     
     @IBOutlet weak var contactsTableView: UITableView!
@@ -23,7 +24,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         self.contactsTableView.dataSource = self
         self.contactsTableView.delegate = self
-//        self.contactsSearchBar.delegate = self
+        self.contactsSearchBar.delegate = self
         loadContactData()
     }
     
@@ -46,11 +47,11 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.contactArr.count
+        return filteredContacts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let contact = self.contactArr[indexPath.row]
+        let contact = filteredContacts[indexPath.row]
         let cell = self.contactsTableView.dequeueReusableCell(withIdentifier: "ContactsCell", for: indexPath)
         cell.textLabel?.text = "\(contact.name.first.capitalized) \(contact.name.last.capitalized)"
         cell.detailTextLabel?.text = "\(contact.location.city.capitalized), \(contact.location.state.capitalized)"
@@ -60,7 +61,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ContactDetailViewController {
             let selectedRow = self.contactsTableView.indexPathForSelectedRow!.row
-            let selectedContact = self.contactArr[selectedRow]
+            let selectedContact = self.filteredContacts[selectedRow]
             destination.contact = selectedContact
         }
     }
@@ -80,6 +81,18 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
             self.contactsTableView.reloadData()
         }
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchTerm = searchBar.text?.lowercased()
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchTerm = searchText
+    }
+    
+    
+    
     
     
 }
