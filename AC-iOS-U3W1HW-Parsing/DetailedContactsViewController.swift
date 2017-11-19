@@ -26,6 +26,7 @@ class DetailedContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadDetailData()
+        view.backgroundColor = .black
         
         // Do any additional setup after loading the view.
     }
@@ -44,8 +45,8 @@ class DetailedContactsViewController: UIViewController {
             return
         }
         labelOne.text = aContact.name.first.capitalized + " " + aContact.name.last.capitalized
-        labelTwo.text = aContact.email
-        labelThree.text = aContact.location.city
+        labelTwo.text = "Email: \(aContact.email)"
+        labelThree.text = "City: \(aContact.location.city.capitalized)"
         labelFour.text = "Phone: \(aContact.phone) - Cell: \(aContact.cell)"
     }
     

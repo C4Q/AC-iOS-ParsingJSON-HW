@@ -9,12 +9,12 @@
 import UIKit
 
 class ContactsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
+    
     @IBOutlet weak var contactsTableView: UITableView!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-     var contacts = [Person]()
+    var contacts = [Person]()
     
     func loadData() {
         if let path = Bundle.main.path(forResource: "userinfo", ofType: "json") {
@@ -54,52 +54,52 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-     return filteredContactArr.count //The filteredContactsArr is a computed property that will show the full contacts array if the searchbar is not being used, or the filtered contacts if it is being used
-     }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredContactArr.count //The filteredContactsArr is a computed property that will show the full contacts array if the searchbar is not being used, or the filtered contacts if it is being used
+    }
     
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-     contacts.sort(){$0.name.first < $1.name.first} //To sort the contacts before the data is loaded into the tableview
+        contacts.sort(){$0.name.first < $1.name.first} //To sort the contacts before the data is loaded into the tableview
         
-     let contact = filteredContactArr[indexPath.row]
+        let contact = filteredContactArr[indexPath.row]
         
-     let cell = contactsTableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
+        let cell = contactsTableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
         
-     cell.textLabel?.text = contact.name.first.capitalized + " " + contact.name.last.capitalized
-     cell.detailTextLabel?.text = contact.location.city
+        cell.textLabel?.text = contact.name.first.capitalized + " " + contact.name.last.capitalized
+        cell.detailTextLabel?.text = contact.location.city
         
-     if let pictureURL = URL(string: contact.picture.thumbnail) {
-     DispatchQueue.global().sync {
-     if let data = try? Data.init(contentsOf: pictureURL) {
-     DispatchQueue.main.async {
-     cell.imageView?.image = UIImage(data: data)
-     }
-     }
-     }
-     }
-     
-     return cell
-     }
+        if let pictureURL = URL(string: contact.picture.thumbnail) {
+            DispatchQueue.global().sync {
+                if let data = try? Data.init(contentsOf: pictureURL) {
+                    DispatchQueue.main.async {
+                        cell.imageView?.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+        
+        return cell
+    }
     
-     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-     self.searchWord = searchBar.text
-     searchBar.resignFirstResponder() //to make the keyboard go away when the user presses enter
-     }
-     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchWord = searchBar.text
+        searchBar.resignFirstResponder() //to make the keyboard go away when the user presses enter
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //to update the filter as the searchbar text changes
-     self.searchWord = searchText
-     }
+        self.searchWord = searchText
+    }
     
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     if let destination = segue.destination as? DetailedContactsViewController {
-     let selectedRow = contactsTableView.indexPathForSelectedRow!.row
-     let selectedContact = filteredContactArr[selectedRow]
-     destination.aContact = selectedContact //destination.THISNAME HERE should always match the name of the variable on your detailed contacts view controller.
-     }
-     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DetailedContactsViewController {
+            let selectedRow = contactsTableView.indexPathForSelectedRow!.row
+            let selectedContact = filteredContactArr[selectedRow]
+            destination.aContact = selectedContact //destination.THISNAME HERE should always match the name of the variable on your detailed contacts view controller.
+        }
+    }
     
- 
-
+    
+    
 }
