@@ -99,6 +99,7 @@
                                 <scopeButtonTitles>
                                     <string>First Name</string>
                                     <string>Last Name</string>
+                                    <string>Full Name</string>
                                     <string>City</string>
                                     <string>State</string>
                                 </scopeButtonTitles>

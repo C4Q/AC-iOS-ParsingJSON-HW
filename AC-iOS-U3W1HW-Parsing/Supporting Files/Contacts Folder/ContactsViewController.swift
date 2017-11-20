@@ -132,6 +132,13 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             return filteredArr
+        case "Full Name":
+            for person in contact {
+                if person.name.first.lowercased().contains(searchTerm.lowercased()) ||  person.name.last.lowercased().contains(searchTerm.lowercased()){
+                    filteredArr.append(person)
+                }
+            }
+            return filteredArr
         default:
             break
         }

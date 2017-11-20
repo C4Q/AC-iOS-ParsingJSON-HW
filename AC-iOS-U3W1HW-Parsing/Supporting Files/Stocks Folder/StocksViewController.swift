@@ -183,7 +183,7 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
         
         
         
-        return "\(monthName), \(yearForHeader)  Average: \(averageOpens) "
+        return "\(monthName), \(yearForHeader)  Average: \(String(format:"%.2f", averageOpens)) "
     }
     
     
