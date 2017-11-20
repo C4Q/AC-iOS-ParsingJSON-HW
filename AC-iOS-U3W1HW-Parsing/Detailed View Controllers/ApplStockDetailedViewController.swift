@@ -9,27 +9,28 @@
 import UIKit
 
 class ApplStockDetailedViewController: UIViewController {
-
+    
+    var stock: ApplStock?
+    @IBOutlet weak var stockDateLabel: UILabel!
+    @IBOutlet weak var stockResultImage: UIImageView!
+    @IBOutlet weak var stockOpenValueLabel: UILabel!
+    @IBOutlet weak var stockCloseValueLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        guard let stock = stock else {
+            return
+        }
+        stockDateLabel.text = "\(stock.date)"
+        if stock.open < stock.close {
+            self.view.backgroundColor = UIColor.green
+            stockResultImage.image = UIImage(named: "thumbsUp")
+        } else {
+            self.view.backgroundColor = UIColor.red
+            stockResultImage.image = UIImage(named: "thumbsDown")
+        }
+        stockOpenValueLabel.text = "Open: $\(stock.open)"
+        stockCloseValueLabel.text = "Close: $\(stock.close)"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

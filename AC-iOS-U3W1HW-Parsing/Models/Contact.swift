@@ -25,6 +25,10 @@ struct Contact: Codable {
     let id: IDWrapper
     let picture: PictureWrapper
     let nat: String
+    
+    static func sortContacts(contactsArray: [Contact]) -> [Contact] {
+        return contactsArray.sorted{$0.name.first < $1.name.first}
+    }
 }
 
 struct NameWrapper: Codable {

@@ -10,26 +10,30 @@ import UIKit
 
 class ContactsDetailedViewController: UIViewController {
 
+    var contact: Contact?
+    
+    @IBOutlet weak var contactProfilePicture: UIImageView!
+    @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet weak var contactCellphoneLabel: UILabel!
+    @IBOutlet weak var contactLocationLabel: UILabel!
+    @IBOutlet weak var contactEmailLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        guard let contact = contact else { return }
+        guard let url = URL(string: contact.picture.large) else { return }
+        do {
+            let data = try Data(contentsOf: url)
+            contactProfilePicture.image = UIImage(data: data)
+        }
+        catch let error {
+            print(error)
+        }
+        contactNameLabel.text = "\(contact.name.title) \(contact.name.first) \(contact.name.last)".capitalized
+        contactCellphoneLabel.text = "Cellphone Number: \(contact.cell)"
+        contactLocationLabel.text = "Location: \(contact.location.city.capitalized)"
+        contactEmailLabel.text = "e-mail: \(contact.email)"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

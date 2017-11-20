@@ -71,24 +71,26 @@ class ApplStock {
         return stocks
     }
     
-    static func makeStockDictByMonth(stocks: [ApplStock]) -> [String : [ApplStock]] {
-        var stocksByMonth = [String: [ApplStock]]()
+    static func makeStockTupleByMonth(stocks: [ApplStock]) -> [(key: String, value: [ApplStock])] {
+        var stocksByMonthDict = [String: [ApplStock]]()
         let allStocks = stocks
         for stock in allStocks {
             let date = stock.date
             var arrDate = date.components(separatedBy: "-")
             arrDate.removeLast()
             let dateKey = arrDate.joined(separator: "-")
-            if let stocksSoFar = stocksByMonth[dateKey] {
+            if let stocksSoFar = stocksByMonthDict[dateKey] {
                 var toAddNewStock: [ApplStock] = stocksSoFar
                 toAddNewStock.append(stock)
-                stocksByMonth.updateValue(toAddNewStock, forKey: dateKey)
+                stocksByMonthDict.updateValue(toAddNewStock, forKey: dateKey)
             } else {
-                stocksByMonth[dateKey] = [stock]
+                stocksByMonthDict[dateKey] = [stock]
             }
         }
-        return stocksByMonth
+        return stocksByMonthDict.sorted{ $0.key < $1.key }
     }
+    
+    //static func sortStocks(S)
     
     static func dateConversion(dateStr: String) -> (month: String, Year: String) {
         let arrDate = dateStr.components(separatedBy: "-")

@@ -12,65 +12,68 @@ class ApplStockViewController: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var applStocksTableView: UITableView!
     var allApplStocks = [ApplStock]()
-    var applStocksByMonthDict = [String: [ApplStock]]()
-    var stocksByMonthSorted = [(key: String, value: [ApplStock])]()
+    var stocksByMonth = [(key: String, value: [ApplStock])]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.applStocksTableView.delegate = self
         self.applStocksTableView.dataSource = self
         loadAllApplStocks()
-        self.applStocksByMonthDict = ApplStock.makeStockDictByMonth(stocks: allApplStocks)
-        stocksByMonthSorted = self.applStocksByMonthDict.sorted{ $0.key < $1.key }
+        self.stocksByMonth = ApplStock.makeStockTupleByMonth(stocks: allApplStocks)
     }
     
     func loadAllApplStocks() {
         if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json") {
             let theURL = URL(fileURLWithPath: path)
-            if let data = try? Data(contentsOf: theURL) {
+            do {
+                let data = try Data(contentsOf: theURL)
                 self.allApplStocks = ApplStock.getApplStocks(from: data)
+            }
+            catch let error {
+                print(error)
             }
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? ApplStockDetailedViewController {
+            guard let selectedPath = applStocksTableView.indexPathForSelectedRow else { return }
+            let selectedRow = selectedPath.row
+            let selectedStock = self.allApplStocks[selectedRow]
+            destination.stock = selectedStock
+        }
     }
-    */
 
 }
-
 
 extension ApplStockViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stocksByMonthSorted[section].value.count
+        return stocksByMonth[section].value.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let dateAsString = stocksByMonthSorted[section].key
+        let dateAsString = stocksByMonth[section].key
         let dateMonthYearTuple = ApplStock.dateConversion(dateStr: dateAsString)
-        let arrayOfStocksOfMonth = stocksByMonthSorted[section].value
+        let arrayOfStocksOfMonth = stocksByMonth[section].value
         let averageOfMonth = ApplStock.findMonthAverage(stockArr: arrayOfStocksOfMonth)
         return dateMonthYearTuple.month + " - " + dateMonthYearTuple.Year + ": Average: " + String(format: "$%.02f", averageOfMonth)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return stocksByMonthSorted.count
+        return stocksByMonth.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let stockCell = tableView.dequeueReusableCell(withIdentifier: "Stock Cell", for: indexPath)
-        let sec = indexPath.section
+        let section = indexPath.section
         let row = indexPath.row
-        let currentStock: ApplStock = stocksByMonthSorted[sec].value[row]
-        stockCell.textLabel?.text = currentStock.date
-        stockCell.detailTextLabel?.text = currentStock.open.description
+        let currentStock: ApplStock = stocksByMonth[section].value[row]
+        guard let stockTextLabel = stockCell.textLabel, let stockDetailTextLabel = stockCell.detailTextLabel else {
+            return stockCell
+        }
+        stockTextLabel.text = currentStock.date
+        stockDetailTextLabel.text = currentStock.open.description
         return stockCell
     }
     
