@@ -58,10 +58,11 @@ extension ContactsVC: UITableViewDataSource, UITableViewDelegate {
 		let cell = self.contactsTableView.dequeueReusableCell(withIdentifier: "Contact Cell", for: indexPath)
 		cell.textLabel?.text = contact.name.fullName
 		cell.detailTextLabel?.text = contact.location.city
+		
 		//load image
 		if let url = URL(string: contact.picture.thumbnail) {
 			//doing work on a background thread - to avoid crashing the phone
-			DispatchQueue.global().sync {
+			DispatchQueue.global().async {
 				if let data = try? Data.init(contentsOf: url) {
 					//go back to main thread to update UI
 					DispatchQueue.main.async {

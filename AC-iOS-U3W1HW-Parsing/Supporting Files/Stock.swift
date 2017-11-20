@@ -6,50 +6,36 @@
 import Foundation
 
 class Stock {
-	let date: String
+	let date: String //2015-11-31
 	let open: Float
 	let close:Float
 	let low: Float
 	let high: Float
 	let volume: Int
+	let monthYearDate: String
+	let shortDate: String
+	let longDate: String
+	var sectionHeader: String { return monthYearDate }
 	
-	var sectionHeader: String { return monthYear }
+	//UPDATE: use built-in DateFormatter to create Date formats
+	static func buildDateFormatter(dateFormat: String) -> DateFormatter {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = dateFormat
+		return dateFormatter
+	}
+	static let inputDateFormatter = buildDateFormatter(dateFormat: "yyyy-MM-dd")
+	static let monthYearDateFormatter = buildDateFormatter(dateFormat: "MMMM, yyyy") //November 2015
+	static let shortDateFormatter = buildDateFormatter(dateFormat: "MMM dd, YYYY")//Nov 13, 2015
+	static let longDateFormatter = buildDateFormatter(dateFormat: "MMMM dd, yyyy") //November 13, 2015
 	
-	var monthYear: String {
+	/* - 	//my original way to format date --2015-11-13 = Nov 2015
+	var monthYearDate: String {
 		enum Month: Int {
 			case January = 01, February, March, April, May, June, July, August, September, October, November, December
 		}
 		let year: String = String(date[date.index(date.startIndex, offsetBy: 0)..<date.index(date.endIndex, offsetBy: -6)])
 		let month = Int((date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.endIndex, offsetBy: -3)]))
 		return "\(Month.init(rawValue: month!)!) \(year)"
-	}
-	
-	/*
-	var monthYear: String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "YYYY-MM-DD"
-		let inputDate = dateFormatter.date(from: date)
-		dateFormatter.dateFormat = "MMMM, YYYY"
-		let monthYear = dateFormatter.string(from: inputDate!)
-		return monthYear
-	}
-
-	var shortDate: String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "YYYY-MM-DD"
-		let inputDate = dateFormatter.date(from: date)
-		dateFormatter.dateFormat = "MMM dd, YYYY"
-		let shortDate = dateFormatter.string(from: inputDate!)
-		return shortDate
-	}
-	
-	var longDate: String {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "YYYY-MM-DD"
-		let inputDate = dateFormatter.date(from: date)
-		dateFormatter.dateFormat = "MMM dd, YYYY"
-		let longDate = dateFormatter.string(from: inputDate!)
-		return longDate
 	}
 	*/
 	
@@ -60,6 +46,15 @@ class Stock {
 		self.low = low
 		self.high = high
 		self.volume = volume
+		
+		if let inputDate = Stock.inputDateFormatter.date(from: self.date) {
+			self.monthYearDate = Stock.monthYearDateFormatter.string(from: inputDate)
+			self.shortDate = Stock.shortDateFormatter.string(from: inputDate)
+			self.longDate = Stock.longDateFormatter.string(from: inputDate)
+		} else {
+			self.monthYearDate = "invalid date"; self.shortDate = "invalid date"; self.longDate = "invalid date"
+		}
+		return
 	}
 	
 	convenience init?(from jsonDict: [String: Any]) {

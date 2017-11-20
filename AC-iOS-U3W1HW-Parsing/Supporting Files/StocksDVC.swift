@@ -30,7 +30,7 @@ class StocksDVC: UIViewController {
 	}
 	
 	func loadData() {
-		stockDate.text = stock.date
+		stockDate.text = stock.longDate
 		stockOpen.text = String(format:"Open: $%.2f", stock.open)
 		stockClose.text = String(format:"Close: $%.2f", stock.close)
 		stockVolume.text = "Volume: \(stock.volume)"

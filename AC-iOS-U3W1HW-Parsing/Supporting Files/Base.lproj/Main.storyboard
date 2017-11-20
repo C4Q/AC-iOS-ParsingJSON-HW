@@ -15,7 +15,7 @@
         <scene sceneID="weO-l1-Avj">
             <objects>
                 <navigationController id="j3p-k5-fMi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Apple Stock" image="stockIcon" id="qFO-X5-NCf"/>
+                    <tabBarItem key="tabBarItem" title="Apple Stock" id="qFO-X5-NCf"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="64X-Jj-Ev6">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -79,7 +79,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hA2-Rc-v56"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Apple Stock" prompt="Winston Maragh - Unit3 - HW3" id="JjR-w1-Mxu"/>
+                    <navigationItem key="navigationItem" title="Apple Stock" prompt="Winston Maragh - Unit3 - HW1" id="JjR-w1-Mxu"/>
                     <connections>
                         <outlet property="stockTableView" destination="Lrx-gl-wGg" id="LfJ-bN-1M7"/>
                     </connections>
@@ -223,7 +223,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="thumbsDown" id="fcm-8W-3Le">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="profileImage" id="fcm-8W-3Le">
                                                     <rect key="frame" x="15" y="0.0" width="44" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -253,7 +253,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3ek-1o-d5X"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Contacts" prompt="Winston Maragh - Unit3 - HW3" id="0dU-wo-nfb"/>
+                    <navigationItem key="navigationItem" title="Contacts" prompt="Winston Maragh - Unit3 - HW1" id="0dU-wo-nfb"/>
                     <connections>
                         <outlet property="contactsTableView" destination="OPt-dB-nbA" id="Noy-8M-2hb"/>
                         <outlet property="searchBar" destination="tWM-FY-KiR" id="V54-cv-n9W"/>
@@ -363,7 +363,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="stockIcon" width="29" height="29"/>
-        <image name="thumbsDown" width="2048" height="2048"/>
+        <image name="profileImage" width="600" height="600"/>
     </resources>
 </document>
