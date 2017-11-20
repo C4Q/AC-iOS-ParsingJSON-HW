@@ -49,7 +49,6 @@ func loadData() {
     
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("rows in section")
         return filteredUsers.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,8 +60,7 @@ func loadData() {
         return cell
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "usersegue" {
-            print("segue works")
+        if segue.identifier == "usersegue" { 
             if let destination = segue.destination as? UserDetailViewController {
                 let row = tableView.indexPathForSelectedRow!.row
                 destination.userDetail = self.sortedUsers[row]
@@ -72,7 +70,6 @@ func loadData() {
     //search bar
     var filteredUsers: [ResultsWrapper] {
         guard let searchWords = searchWords, searchWords != "" else {
-            print("1")
             return sortedUsers
             //populates w sortedusers when blank search bar
         }

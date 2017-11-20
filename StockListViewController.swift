@@ -10,38 +10,63 @@ import UIKit
 
 class StockListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var stocks = [Stock]()
+    //var sortedStocks: [Stock] {return stocks.sorted {$0.date < $1.date}}
+    var sectionNamesArr = [String]()
     
+    func stockThatMonth(_ section: Int) -> [Stock] {
+        
+        return stocks.filter { $0.sectionNames == sectionNamesArr[section]}
+    }
     @IBOutlet weak var tableView: UITableView!
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        loadData()
-    }
     
     func loadData() {
         if let path = Bundle.main.path(forResource: "applstockinfo", ofType: "json") {
-            print("path works")
             let myURL = URL(fileURLWithPath: path)
             if let data = try? Data(contentsOf: myURL) {
                 self.stocks = Stock.getStock(from: data)
             }
         }
     }
+    func getSectionNames() {
+        for stocks in stocks {
+            if !sectionNamesArr.contains(stocks.sectionNames) {
+                sectionNamesArr.append(stocks.sectionNames)
+            }
+        }
+    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        loadData()
+        getSectionNames()
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stocks.count
+        let thesectionNames = sectionNamesArr[section]
+        let stockSections = stocks.filter{$0.sectionNames == thesectionNames}
+        return stockSections.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let stock = stocks[indexPath.row]
+      //displays sorted stocks in tableview^
+        let thesectionNames = sectionNamesArr[indexPath.section]
+        let stockSections = stocks.filter{$0.sectionNames == thesectionNames}
+        let stock = stockSections[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "Stock cell", for: indexPath)
         cell.textLabel?.text = stock.date
         cell.detailTextLabel?.text = "\(stock.open)"
         return cell
     }
-    sec
-    
-    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionNamesArr.count
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+       // let thesectionNames = sectionNamesArr[section]
+       // let stockSections = stocks.filter{$0.sectionNames == thesectionNames}
+        return sectionNamesArr[section]
+        
+    }
+ 
 }
