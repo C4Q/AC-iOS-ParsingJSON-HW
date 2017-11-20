@@ -59,6 +59,7 @@
 				D2BF9B731FC2073300F1B08A /* UserDetailViewController.swift */,
 				D28BD3F31FC281F200587D97 /* Stock.swift */,
 				D28BD3F51FC284A900587D97 /* StockListViewController.swift */,
+				D2F536441FC3797000E54394 /* StockDetailViewController.swift */,
 				541D38081FBCDEA900F6A0A9 /* AC-iOS-U3W1HW-Parsing */,
 				541D38071FBCDEA900F6A0A9 /* Products */,
 			);
@@ -86,7 +87,6 @@
 			children = (
 				541D38091FBCDEA900F6A0A9 /* AppDelegate.swift */,
 				541D380D1FBCDEA900F6A0A9 /* Main.storyboard */,
-				D2F536441FC3797000E54394 /* StockDetailViewController.swift */,
 				541D38101FBCDEA900F6A0A9 /* Assets.xcassets */,
 				541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */,
 			);

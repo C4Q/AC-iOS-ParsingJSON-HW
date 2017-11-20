@@ -75,6 +75,14 @@ class StockListViewController: UIViewController, UITableViewDelegate, UITableVie
         return sectionNamesArr[section] + " Average : \(roundedStockAvg)"
         
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "stocksegue" {
+            if let destination = segue.destination as? StockDetailViewController {
+                let row = tableView.indexPathForSelectedRow!.row
+                destination.stockDetail = self.stocks[row]
+            }
+        }
+    }
     
  
 }
