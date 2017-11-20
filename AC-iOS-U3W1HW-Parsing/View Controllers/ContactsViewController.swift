@@ -51,6 +51,7 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        contactArr.sort(){ ($0.name.first != $1.name.first) ? ($0.name.first < $1.name.first) : ($0.name.last < $1.name.last) } // sorts by first and last name woooo https://stackoverflow.com/questions/37603960/swift-sort-array-of-objects-with-multiple-criteria
         let contact = filteredContacts[indexPath.row]
         let cell = self.contactsTableView.dequeueReusableCell(withIdentifier: "ContactsCell", for: indexPath)
         cell.textLabel?.text = "\(contact.name.first.capitalized) \(contact.name.last.capitalized)"
@@ -71,22 +72,23 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
         guard let searchTerm = searchTerm, searchTerm != "" else {
             return contactArr
         }
-        return contactArr.filter{(contact) in
+        /// list contacts alphabetically, with subtitle of Proper cased name and Location
+        return contactArr.filter {(contact) in
             contact.name.first.lowercased().contains(searchTerm.lowercased())
         }
     }
-    
+
     var searchTerm: String? {
         didSet {
             self.contactsTableView.reloadData()
         }
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchTerm = searchBar.text?.lowercased()
         searchBar.resignFirstResponder()
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchTerm = searchText
     }
@@ -95,11 +97,11 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     
+    
 }
 
 
-    
-    /// list contacts alphabetically, with subtitle of Proper cased name and Location
+
     
 
 
