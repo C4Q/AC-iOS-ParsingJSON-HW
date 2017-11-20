@@ -14,12 +14,16 @@ struct UserInfo: Codable {
 struct ResultsWrapper : Codable{
     let name: NameWrapper
     let location: Locations
+    let picture: PictureWrapper
     let email: String
 }
 struct NameWrapper: Codable {
     var title: String
     var first: String
     var last: String
+    var fullName: String {
+        return first.capitalized + " " + last.capitalized
+    }
 }
 
 struct Locations: Codable {
@@ -28,5 +32,9 @@ struct Locations: Codable {
     let state:String
     let postcode: String
 }
-
+struct PictureWrapper: Codable {
+    let large: String
+    let medium: String
+    let thumbnail: String
+}
 

@@ -9,27 +9,32 @@
 import UIKit
 
 class UserDetailViewController: UIViewController {
-    var userDetail: ResultsWrapper?
-   
+    var userDetail: ResultsWrapper!
+    
+    @IBOutlet weak var pictureView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-        
+    
     func setupUI() {
-        if let path = Bundle.main.path(forResource: "userinfo", ofType: "json") {
-            let myURL = URL(fileURLWithPath: path)
-            if let data = try? Data(contentsOf: myURL) {
-                let myDecoder = JSONDecoder()
-                do {
-                    //outerwrapper
-                    let userDetail = try myDecoder.decode(ResultsWrapper.self, from: data)
-                    //inner wrapper
-                    nameLabel.text = "\(userDetail.name.first.capitalized) \(userDetail.name.last.capitalized)"
-                } catch {
-                    print(error)
+        nameLabel.text = userDetail?.name.fullName
+        locationLabel.text = "\(userDetail.location.city.capitalized)"
+        emailLabel.text = "\(userDetail.email.capitalized)"
+        //gets picture
+        if let url = URL(string: userDetail.picture.large) {
+            DispatchQueue.global().sync {
+                //loading async
+                if let data = try? Data.init(contentsOf: url) {
+                    //updates UI on main thread
+                    DispatchQueue.main.async {
+                        self.pictureView.image = UIImage(data: data)
+                    }
+                    
                 }
             }
         }
