@@ -63,10 +63,18 @@ class StockListViewController: UIViewController, UITableViewDelegate, UITableVie
         return sectionNamesArr.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-       // let thesectionNames = sectionNamesArr[section]
-       // let stockSections = stocks.filter{$0.sectionNames == thesectionNames}
-        return sectionNamesArr[section]
+        let thesectionNames = sectionNamesArr[section]
+        let stockSections = stocks.filter{$0.sectionNames == thesectionNames}
+        var total = 0.0
+        for stock in stockSections {
+            total += stock.open
+        }
+        let stockAvg = total/Double(stockSections.count)
+        let roundedStockAvg = round((stockAvg * 100))/100
+//        https://stackoverflow.com/questions/27338573/rounding-a-double-value-to-x-number-of-decimal-places-in-swift
+        return sectionNamesArr[section] + " Average : \(roundedStockAvg)"
         
     }
+    
  
 }

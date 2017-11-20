@@ -48,7 +48,9 @@ class Stock {
             
             
         }
-        return "\(month) \(year)"
+
+
+        return "\(month) - \(year)"
     }
     
     init(date: String, open: Double, close: Double) {

@@ -70,20 +70,63 @@
             </objects>
             <point key="canvasLocation" x="-5559" y="-267"/>
         </scene>
-        <!--View Controller-->
+        <!--Stock Detail View Controller-->
         <scene sceneID="lmh-yQ-tP6">
             <objects>
-                <viewController id="4fU-hC-Boa" sceneMemberID="viewController">
+                <viewController id="4fU-hC-Boa" customClass="StockDetailViewController" customModule="AC_iOS_U3W1HW_Parsing" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YlI-bD-wrY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dateLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPI-tb-7N7">
+                                <rect key="frame" x="47" y="98" width="281" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="closeLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztX-z2-b0k">
+                                <rect key="frame" x="217.5" y="495" width="82.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbsUp" translatesAutoresizingMaskIntoConstraints="NO" id="h9a-hO-rgm">
+                                <rect key="frame" x="-0.5" y="206" width="375" height="267"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="openLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQE-n8-5QI">
+                                <rect key="frame" x="75" y="495" width="80" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MPI-tb-7N7" firstAttribute="centerX" secondItem="a7U-eM-lhe" secondAttribute="centerX" id="35w-O8-oaa"/>
+                            <constraint firstItem="h9a-hO-rgm" firstAttribute="top" secondItem="MPI-tb-7N7" secondAttribute="bottom" constant="87" id="9gH-UY-dhC"/>
+                            <constraint firstItem="MPI-tb-7N7" firstAttribute="width" secondItem="YlI-bD-wrY" secondAttribute="width" multiplier="3:4" id="CrT-a2-D8W"/>
+                            <constraint firstItem="MPI-tb-7N7" firstAttribute="top" secondItem="a7U-eM-lhe" secondAttribute="top" multiplier="3:4" constant="50" id="Gph-vG-2qB"/>
+                            <constraint firstItem="iQE-n8-5QI" firstAttribute="top" secondItem="h9a-hO-rgm" secondAttribute="bottom" constant="22" id="MmE-6v-CCk"/>
+                            <constraint firstItem="iQE-n8-5QI" firstAttribute="leading" secondItem="a7U-eM-lhe" secondAttribute="leading" constant="75" id="S9e-Hq-EIT"/>
+                            <constraint firstItem="ztX-z2-b0k" firstAttribute="leading" secondItem="iQE-n8-5QI" secondAttribute="trailing" constant="62.5" id="YQo-pz-ffr"/>
+                            <constraint firstItem="a7U-eM-lhe" firstAttribute="trailing" secondItem="ztX-z2-b0k" secondAttribute="trailing" constant="75" id="gjf-19-UHV"/>
+                            <constraint firstItem="ztX-z2-b0k" firstAttribute="top" secondItem="h9a-hO-rgm" secondAttribute="bottom" constant="22" id="juJ-Ng-KRD"/>
+                            <constraint firstItem="h9a-hO-rgm" firstAttribute="centerX" secondItem="a7U-eM-lhe" secondAttribute="centerX" id="ng9-yb-AJw"/>
+                            <constraint firstItem="h9a-hO-rgm" firstAttribute="width" secondItem="YlI-bD-wrY" secondAttribute="width" id="o20-yy-igy"/>
+                            <constraint firstItem="h9a-hO-rgm" firstAttribute="height" secondItem="YlI-bD-wrY" secondAttribute="height" multiplier="0.4" id="tcP-3C-D81"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="a7U-eM-lhe"/>
                     </view>
+                    <connections>
+                        <outlet property="closeLabel" destination="ztX-z2-b0k" id="1Y5-aV-bNC"/>
+                        <outlet property="dateLabel" destination="MPI-tb-7N7" id="3o3-ol-gjX"/>
+                        <outlet property="openLabel" destination="iQE-n8-5QI" id="Hfl-84-9VA"/>
+                        <outlet property="picView" destination="h9a-hO-rgm" id="gQH-N5-tCx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WyH-7Q-dvB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4716" y="-268"/>
+            <point key="canvasLocation" x="-4716" y="-268.51574212893553"/>
         </scene>
         <!--User List View Controller-->
         <scene sceneID="rzz-WN-vNE">
@@ -151,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zva-NB-x71" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5559.1999999999998" y="-928.78560719640188"/>
+            <point key="canvasLocation" x="-5560" y="-1254"/>
         </scene>
         <!--User Detail View Controller-->
         <scene sceneID="IsW-j9-PeB">
@@ -210,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3k4-kC-OM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4697" y="-928"/>
+            <point key="canvasLocation" x="-4717" y="-1255"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="HCp-mO-8PT">
@@ -247,7 +290,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eah-ef-hEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6435.1999999999998" y="-927.4362818590705"/>
+            <point key="canvasLocation" x="-6299" y="-1255"/>
         </scene>
         <!--Stock-->
         <scene sceneID="gVq-tU-PQ3">
@@ -271,5 +314,6 @@
     </scenes>
     <resources>
         <image name="profileImage" width="600" height="600"/>
+        <image name="thumbsUp" width="7360" height="4912"/>
     </resources>
 </document>
