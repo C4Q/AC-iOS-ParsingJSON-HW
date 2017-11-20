@@ -106,6 +106,10 @@ extension ContactsListViewController: UITableViewDelegate, UITableViewDataSource
             
             //set up images
             let apiManager = APIManager()
+            
+            //placeholder image
+            contactCell.contactImageView.image = #imageLiteral(resourceName: "profileImage")
+            
             apiManager.getData(endpoint: currentContact.picture.medium) { (data: Data?) in
                 guard let data = data else {
                     print("Error: couldn't load data")
