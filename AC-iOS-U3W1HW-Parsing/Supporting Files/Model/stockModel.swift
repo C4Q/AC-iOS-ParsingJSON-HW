@@ -31,29 +31,49 @@ class Stock {
         let close = jsonDict["close"] as? Double
         self.init(date: date, open: open!, close: close!)
     }
-    static func getStocks(from data: Data) -> ([String], [String: [Stock]]){
-        var stocksDictionary = [String: [Stock]]()
-        var sectionArray = [String]()
-        
-        
+    
+//    static func getStocks(from data: Data) -> ([String], [String: [Stock]]){
+//        var stocksDictionary = [String: [Stock]]()
+//        var sectionArray = [String]()
+//        do {
+//            let json = try JSONSerialization.jsonObject(with: data, options: [])
+//            guard let jsonDictArr = json as? [[String: Any]] else {return (sectionArray, stocksDictionary)}
+//            for jsonDict in jsonDictArr {
+//                if let newStock = Stock.init(from: jsonDict) {
+//                    if stocksDictionary[newStock.sectionNameNeedAverage] == nil {
+//                        stocksDictionary[newStock.sectionNameNeedAverage] = []
+//                        sectionArray.append(newStock.sectionNameNeedAverage)
+//                        var average = [Double]()
+//                        for (stock, value) in stocksDictionary {
+//                            var counter = 0
+//                            for open in value {
+//                                counter += 1
+//                                var addingValues: Double = 0.0
+//                                addingValues += open.open
+//                                (addingValues)/(Double(counter))
+//
+//                            }
+    //                    stocksDictionary[newStock.sectionNameNeedAverage]?.append(newStock)
+//
+//
+//                        }
+    static func getStocks(from data: Data) -> [Stock] {
+        var stocks = [Stock]()
         do {
             let json = try JSONSerialization.jsonObject(with: data, options: [])
-            guard let jsonDictArr = json as? [[String: Any]] else {return (sectionArray, stocksDictionary)}
-            for jsonDict in jsonDictArr {
-                if let newStock = Stock.init(from: jsonDict) {
-                    if stocksDictionary[newStock.sectionNameNeedAverage] == nil {
-                        stocksDictionary[newStock.sectionNameNeedAverage] = []
-                        sectionArray.append(newStock.sectionNameNeedAverage)
-                    }
-                    stocksDictionary[newStock.sectionNameNeedAverage]?.append(newStock)
-                    
+            guard let stockDictArray = json as? [[String:Any]] else {return []}
+            for stockDict in stockDictArray {
+                if let newStock = Stock(from: stockDict) {
+                    stocks.append(newStock)
                 }
-
             }
         }
         catch {
             print("error")
         }
-        return (sectionArray, stocksDictionary)
+        return stocks
+    }
+    static func averageOfMonth(stockArr: [Stock]) -> Double {
+        return(stockArr.reduce(0.0){$0 + $1.open})/Double(stockArr.count)
     }
 }
