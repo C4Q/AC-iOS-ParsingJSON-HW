@@ -14,13 +14,13 @@ class contactDetailViewController: UIViewController {
     @IBOutlet weak var contactImageView: UIImageView!
     @IBOutlet var contactLabels: [UILabel]!
     
+    // MARK: - Variables
     var selectedContact: Contact? = nil
     
     // MARK: - Override Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialView()
-
     }
     
     // MARK: - Functions
