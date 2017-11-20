@@ -8,28 +8,78 @@
 
 import UIKit
 
-class ContactsTableViewController: UIViewController {
+//searchbar
 
+
+class ContactsTableViewController: UIViewController {
+    
+    var contacts = [Person]()
+    
+    @IBOutlet weak var contactsTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        contactsTableView.dataSource = self
+        getContactsData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func getContactsData() {
+        if let path = Bundle.main.path(forResource: "ContactInfo", ofType: "json"){
+            let myUrl = URL(fileURLWithPath: path)
+            if let data = try? Data(contentsOf: myUrl){
+                let myDecoder = JSONDecoder()
+                do {
+                    let allContacts = try myDecoder.decode(ContactInfo.self, from: data)
+                    self.contacts = allContacts.results
+                    
+                } catch let error{
+                    print(error)
+                }
+            }
+        }
+        for person in contacts {
+            print(person.name, person.email, person.location)
+        }
     }
-    */
-
 }
+
+extension ContactsTableViewController: UITableViewDataSource {
+    //sorting names alphabetically
+    //self.contacts.sort(){$0.name.first < $1.name.last}
+    
+    
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contacts.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Person Cell", for: indexPath)
+        let person = contacts[indexPath.row]
+        
+        cell.textLabel?.text = person.name.first.capitalized + " " + person.name.last.capitalized
+        cell.detailTextLabel?.text = person.location.city
+        
+        //add thumbnail picture
+        
+        return cell
+    }
+    
+    
+    
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
