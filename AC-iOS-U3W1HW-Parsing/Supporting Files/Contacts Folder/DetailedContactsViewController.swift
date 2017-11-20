@@ -35,7 +35,7 @@ class DetailedContactsViewController: UIViewController, UITableViewDelegate, UIT
             }
         }
         
-        let address = "\(person.location.street.capitalized), \(person.location.city.capitalized), \(person.location.street.capitalized), \(person.location.postcode))"
+        let address = "\(person.location.street.capitalized), \(person.location.city.capitalized), \(person.location.street.capitalized), \(person.location.postcode)"
         let info = [person.phone?.description, person.cell?.description, person.email, address]
         
         for info in info {
