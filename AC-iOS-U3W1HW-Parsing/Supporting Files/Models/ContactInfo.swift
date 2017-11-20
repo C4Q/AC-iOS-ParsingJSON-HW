@@ -9,22 +9,94 @@
 import Foundation
 ///Codable
 
-struct ContactInfo: Codable{
+//set the properties that you will and might use on your app
+
+struct Contacts: Codable {
     let results: [Person]
 }
 
-struct Person: Codable{
+struct Person: Codable {
+    let gender: String
     let name: NameWrapper
     let location: LocationWrapper
     let email: String
+    let picture: PictureWrapper
+    let cell: String
 }
 
-struct NameWrapper: Codable{
+struct NameWrapper: Codable {
     let first: String
     let last: String
 }
 
-struct LocationWrapper: Codable{
+struct LocationWrapper: Codable {
+    let street: String
     let city: String
     let state: String
+    
 }
+
+struct PictureWrapper: Codable {
+    let thumbnail: String
+    let medium: String
+    let large: String
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//struct ContactInfo: Codable{
+//    let results: [Person]
+//}
+//
+//struct Person: Codable{
+//    let name: NameWrapper
+//    let location: LocationWrapper
+//    let email: String
+//}
+//
+//struct NameWrapper: Codable{
+//    let first: String
+//    let last: String
+//}
+//
+//struct LocationWrapper: Codable{
+//    let street: String
+//    let city: String
+//    let state: String
+//
+//}
+//
+

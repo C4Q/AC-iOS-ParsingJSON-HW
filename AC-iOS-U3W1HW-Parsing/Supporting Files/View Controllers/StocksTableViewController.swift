@@ -59,6 +59,7 @@ extension StocksTableViewController: UITableViewDataSource{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailStocksViewController {
             //set up properties to send over
+            //sending over information from the row of the tableview that was selected by the user
             destination.stocks = stockInfo[stocksTableView.indexPathForSelectedRow!.row]
         }
     }

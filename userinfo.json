@@ -3,21 +3,21 @@
                {
                "gender":"male",
                "name":{
-               "title":"mr",
-               "first":"eugene",
-               "last":"henry"
-               },
+                   "title":"mr",
+                   "first":"eugene",
+                   "last":"henry"
+                       },
                "location":{
-               "street":"1673 queen street",
-               "city":"cardiff",
-               "state":"oxfordshire",
-               "postcode":"F5N 9HN"
+                   "street":"1673 queen street",
+                   "city":"cardiff",
+                   "state":"oxfordshire",
+                   "postcode":"F5N 9HN"
                },
                "email":"eugene.henry@example.com",
                "login":{
-               "username":"goldensnake288",
-               "password":"daniel1",
-               "salt":"xhhmtMjh",
+                   "username":"goldensnake288",
+                   "password":"daniel1",
+                   "salt":"xhhmtMjh",
                "md5":"317f40b1d41a6ffa9c849af4296fc7f9",
                "sha1":"d8c26eea74e15af8e99d55f5965817af358f14a8",
                "sha256":"7f6eb7578baa01ac5a168fbf8f88f198bb62b3cfc9e0514d4016697e429fcf5a"
