@@ -111,12 +111,11 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
         
         for opens in stockDateArray {
             averageOpens += opens.open
-//        averageOpens = averageOpens / Double(stockDateArray.count)
-     
         }
         averageOpens = averageOpens / Double(stockDateArray.count)
+
         
-      //Date Producer
+        //Date Producer
         for date in modelDate! {
             dateTitle = dateTitle + date.description
             counter += 1
@@ -126,21 +125,17 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
         
-     //Month Producer
+        //Month Producer
+        
         var monthCounter = 0
         var monthName = ""
-        
-        
         var monthforHeader = ""
         
         for month in dateTitle{
-            
             monthCounter += 1
             
-        
             if monthCounter >= 6  && monthCounter <= 8{
-              monthforHeader = monthforHeader + month.description
-                print("This:  \(monthforHeader)")
+                monthforHeader = monthforHeader + month.description
             }
             
             switch monthforHeader {
@@ -170,10 +165,10 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
                 monthName = "September"
             default:
                 monthName = monthforHeader
-                }
             }
+        }
         
-      //Year Producer 
+        //Year Producer
         var yearForHeader = ""
         var yearCounter = 0
         for year in dateTitle {
@@ -184,12 +179,15 @@ class StocksViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
         
-
+        
         
         
         
         return "\(monthName), \(yearForHeader)  Average: \(averageOpens) "
     }
+    
+    
+    
     
     
     
