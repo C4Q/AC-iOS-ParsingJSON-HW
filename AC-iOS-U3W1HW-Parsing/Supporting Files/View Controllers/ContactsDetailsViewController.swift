@@ -10,6 +10,14 @@ import UIKit
 
 class ContactsDetailsViewController: UIViewController {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var cellNumberLabel: UILabel!
+    @IBOutlet weak var houseNumberLabel: UILabel!
+    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

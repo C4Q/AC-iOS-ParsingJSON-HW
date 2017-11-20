@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ResultsWrapper: Codable {
     let results: [Contact]
@@ -21,12 +22,9 @@ struct Contact: Codable {
     let phone: String
     let cell: String
     let picture: Picture
-    
-    
 }
 
 struct Name: Codable {
-    //let title: String
     let first: String
     let last: String
 }
@@ -38,10 +36,43 @@ struct Location: Codable {
     let postcode: String
 }
 
-struct Picture: Codable {
+class Picture: Codable {
     let large: String
     let thumbnail: String
     
+    private(set) var largeImage: UIImage? = nil
+    private(set) var thumbnailImage: UIImage? = nil
+    
+    private enum CodingKeys: String, CodingKey {
+        case large
+        case thumbnail
+    }
+
+    func getThumbnail(onComplete: @escaping () -> Void) {
+        guard let url = URL(string: thumbnail) else { return }
+        UIImage.fetchAsync(url: url) { (image: UIImage) in
+            self.thumbnailImage = image
+            onComplete()
+        }
+    }
+
+    private func getLarge() {
+        guard let url = URL(string: large) else { return }
+        UIImage.fetchAsync(url: url) { (image) in
+            self.largeImage = image
+        }
+    }
+}
+
+extension UIImage {
+    class func fetchAsync(url: URL, onComplete: @escaping (UIImage) -> ()) {
+        DispatchQueue.global().async {
+            guard let data = try? Data.init(contentsOf: url) else { return }
+            if let image = UIImage(data: data) {
+                onComplete(image)
+            }
+        }
+    }
 }
 
 class JSONHandler {
