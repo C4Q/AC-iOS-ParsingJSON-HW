@@ -13,10 +13,12 @@ class StocksListViewController: UIViewController {
     @IBOutlet weak var stocksTableView: UITableView!
     
     var stocks: [Stock] = []
+    var sectionNames: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getData()
+        getSectionNames()
         stocksTableView.delegate = self
         stocksTableView.dataSource = self
     }
@@ -34,14 +36,38 @@ class StocksListViewController: UIViewController {
             return
         }
         
-        stocks = Stock.getStocks(from: data)
+        //setting up data - from https://stackoverflow.com/questions/38168594/sort-objects-in-array-by-date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        stocks = Stock.getStocks(from: data).sorted { (currentStock, nextStock) -> Bool in
+            guard
+                let currentStockDate = dateFormatter.date(from: currentStock.date),
+                let nextStockDate = dateFormatter.date(from: nextStock.date)
+            else {
+                return false
+            }
+            
+            return currentStockDate.compare(nextStockDate) == .orderedAscending
+        }
+    }
+    
+    func getSectionNames() {
+        for stock in stocks {
+            if !sectionNames.contains(stock.sectionName) {
+                sectionNames.append(stock.sectionName)
+            }
+        }
     }
     
     //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //to do
+        if let selectedCell = sender as? UITableViewCell, let selectedIndexPath = stocksTableView.indexPath(for: selectedCell), let destinationVC = segue.destination as? StocksDetailViewController {
+            let currentRowsInSection = stocks.filter{$0.sectionName == sectionNames[selectedIndexPath.section]}
+            
+            destinationVC.stock = currentRowsInSection[selectedIndexPath.row]
+        }
     }
-    
 }
 
 //MARK: - Table View Methods
@@ -56,13 +82,34 @@ extension StocksListViewController: UITableViewDelegate, UITableViewDataSource {
     
     //Table View Data Source Methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stocks.count
+        let currentRowsInSection = stocks.filter{$0.sectionName == sectionNames[section]}
+        
+        return currentRowsInSection.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionNames.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let currentStocksInRow = stocks.filter{$0.sectionName == sectionNames[section]}
+        
+        let average = currentStocksInRow.reduce(0) { (sum, nextStock) -> Double in
+            sum + nextStock.close
+        } / Double(currentStocksInRow.count)
+        
+        let averageTruncated = floor(average * 100) / 100
+        
+        return "\(sectionNames[section]) - Average: $\(averageTruncated)"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath)
+        let currentStocksInSection = stocks.filter{$0.sectionName == sectionNames[indexPath.section]}
+        let currentStock = currentStocksInSection[indexPath.row]
         
-        //to do
+        cell.textLabel?.text = currentStock.date.description
+        cell.detailTextLabel?.text = currentStock.close.description
         
         return cell
     }
