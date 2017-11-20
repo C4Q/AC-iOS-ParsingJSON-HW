@@ -18,7 +18,7 @@ struct Contact: Codable {
     let email: String
     let picture: ProfilePhoto
     let cell: String
-    let dob: String
+    private let dob: String
     var birthday: String {
         let monthIndexSet: IndexSet = [5, 6]
         let dayIndexSet: IndexSet = [8, 9]
@@ -57,8 +57,8 @@ struct Contact: Codable {
 }
 
 struct FullName: Codable {
-    let first: String
-    let last: String
+    private let first: String
+    private let last: String
     var firstNameFormatted: String {
         return first.capitalized
     }

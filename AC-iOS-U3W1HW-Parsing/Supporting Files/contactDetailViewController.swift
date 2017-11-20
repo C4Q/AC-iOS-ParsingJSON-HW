@@ -63,32 +63,3 @@ class contactDetailViewController: UIViewController {
 
 }
 
-
-
-
-/*
-struct Contact: Codable {
-    let name: FullName
-    let location: Address
-    let email: String
-    let picture: ProfilePhoto
-    let cell: String
-    let dob: String
-}
-
-struct FullName: Codable {
-    let first: String
-    let last: String
-}
-
-struct Address: Codable {
-    let street: String
-    let city: String
-    let state: String
-    let postcode: String
-}
-
-struct ProfilePhoto: Codable {
-    let medium: String
-}
-*/
