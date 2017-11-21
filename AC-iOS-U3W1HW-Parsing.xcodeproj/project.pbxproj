@@ -13,6 +13,12 @@
 		541D38141FBCDEA900F6A0A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */; };
 		541D381C1FBCDFAC00F6A0A9 /* applstockinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */; };
 		541D381E1FBCDFE100F6A0A9 /* userinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381D1FBCDFE100F6A0A9 /* userinfo.json */; };
+		8120EF951FBDE24000F4686D /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8120EF941FBDE24000F4686D /* ContactDetailViewController.swift */; };
+		81E8E8EC1FBDDC5100C25A25 /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E8E8EB1FBDDC5100C25A25 /* ContactsTableViewController.swift */; };
+		81E8E8EE1FBDDC7400C25A25 /* StocksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E8E8ED1FBDDC7400C25A25 /* StocksTableViewController.swift */; };
+		81E8E8F01FBDDC8C00C25A25 /* StockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E8E8EF1FBDDC8C00C25A25 /* StockDetailViewController.swift */; };
+		81E8E8F31FBDDCDB00C25A25 /* StockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E8E8F21FBDDCDB00C25A25 /* StockData.swift */; };
+		81E8E8F51FBDDCEA00C25A25 /* ContactsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E8E8F41FBDDCEA00C25A25 /* ContactsData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		541D38151FBCDEA900F6A0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = applstockinfo.json; sourceTree = "<group>"; };
 		541D381D1FBCDFE100F6A0A9 /* userinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userinfo.json; sourceTree = "<group>"; };
+		8120EF941FBDE24000F4686D /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
+		81E8E8EB1FBDDC5100C25A25 /* ContactsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
+		81E8E8ED1FBDDC7400C25A25 /* StocksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksTableViewController.swift; sourceTree = "<group>"; };
+		81E8E8EF1FBDDC8C00C25A25 /* StockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailViewController.swift; sourceTree = "<group>"; };
+		81E8E8F21FBDDCDB00C25A25 /* StockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockData.swift; sourceTree = "<group>"; };
+		81E8E8F41FBDDCEA00C25A25 /* ContactsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,8 @@
 			children = (
 				541D381F1FBCE08B00F6A0A9 /* Supporting Files */,
 				541D38151FBCDEA900F6A0A9 /* Info.plist */,
+				8120EF931FBDE0E500F4686D /* Models */,
+				81E8E8F11FBDDCA100C25A25 /* View Controllers */,
 			);
 			path = "AC-iOS-U3W1HW-Parsing";
 			sourceTree = "<group>";
@@ -73,6 +87,26 @@
 				541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8120EF931FBDE0E500F4686D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81E8E8F21FBDDCDB00C25A25 /* StockData.swift */,
+				81E8E8F41FBDDCEA00C25A25 /* ContactsData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		81E8E8F11FBDDCA100C25A25 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				81E8E8EB1FBDDC5100C25A25 /* ContactsTableViewController.swift */,
+				81E8E8ED1FBDDC7400C25A25 /* StocksTableViewController.swift */,
+				8120EF941FBDE24000F4686D /* ContactDetailViewController.swift */,
+				81E8E8EF1FBDDC8C00C25A25 /* StockDetailViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +183,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81E8E8F01FBDDC8C00C25A25 /* StockDetailViewController.swift in Sources */,
+				81E8E8EC1FBDDC5100C25A25 /* ContactsTableViewController.swift in Sources */,
+				81E8E8F51FBDDCEA00C25A25 /* ContactsData.swift in Sources */,
+				8120EF951FBDE24000F4686D /* ContactDetailViewController.swift in Sources */,
 				541D380A1FBCDEA900F6A0A9 /* AppDelegate.swift in Sources */,
+				81E8E8F31FBDDCDB00C25A25 /* StockData.swift in Sources */,
+				81E8E8EE1FBDDC7400C25A25 /* StocksTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
