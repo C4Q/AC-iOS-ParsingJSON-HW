@@ -26,12 +26,11 @@ class ContactsDetailedViewController: UIViewController {
         do {
             let data = try Data(contentsOf: url)
             contactProfilePicture.image = UIImage(data: data)
-        }
-        catch let error {
+        } catch let error {
             print(error)
         }
-        contactNameLabel.text = "\(contact.name.title) \(contact.name.first) \(contact.name.last)".capitalized
-        contactCellphoneLabel.text = "Cellphone Number: \(contact.cell)"
+        contactNameLabel.text = "\(contact.name.first) \(contact.name.last)".capitalized
+        contactCellphoneLabel.text = "Cellphone #: \(contact.cell)"
         contactLocationLabel.text = "Location: \(contact.location.city.capitalized)"
         contactEmailLabel.text = "e-mail: \(contact.email)"
     }

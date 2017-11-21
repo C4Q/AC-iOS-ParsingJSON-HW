@@ -12,46 +12,18 @@ class ApplStock {
 
     let date: String
     let open: Double
-    let high: Double
-    let low: Double
     let close: Double
-    let volume: Int
-    let unadjustedVolume: Int
-    let change: Double
-    let changePercent: Double
-    let vwap: Double
-    let label: String
-    let changeOverTime: Double
     
-    init(date: String, open: Double, high: Double, low: Double, close: Double, volume: Int, unadjustedVolume: Int, change: Double, changePercent: Double, vwap: Double, label: String, changeOverTime: Double) {
+    init(date: String, open: Double, close: Double) {
         self.date = date
         self.open = open
-        self.high = high
-        self.low = low
         self.close = close
-        self.volume = volume
-        self.unadjustedVolume = unadjustedVolume
-        self.change = change
-        self.changePercent = changePercent
-        self.vwap = vwap
-        self.label = label
-        self.changeOverTime = changeOverTime
     }
     convenience init?(from dict: [String: Any]) {
-        let date = dict["date"] as? String ?? "Unknown date"
-        let open = dict["open"] as? Double ?? 0
-        let high = dict["high"] as? Double ?? 0
-        let low = dict["low"] as? Double ?? 0
-        let close = dict["close"] as? Double ?? 0
-        let volume = dict["volume"] as? Int ?? 0
-        let unadjustedVolume = dict["unadjustedVolume"] as? Int ?? 0
-        let change = dict["change"] as? Double ?? 0
-        let changePercent = dict["changePercent"] as? Double ?? 0
-        let vwap = dict["vwap"] as? Double ?? 0
-        let label = dict["label"] as? String ?? "Unknown label"
-        let changeOverTime = dict["changeOverTime"] as? Double ?? 0
-        
-        self.init(date: date, open: open, high: high, low: low, close: close, volume: volume, unadjustedVolume: unadjustedVolume, change: change, changePercent: changePercent, vwap: vwap, label: label, changeOverTime: changeOverTime)
+        guard let date = dict["date"] as? String else { return nil }
+        guard let open = dict["open"] as? Double else { return nil }
+        guard let close = dict["close"] as? Double else { return nil }
+        self.init(date: date, open: open, close: close)
     }
     
     static func getApplStocks(from data: Data) -> [ApplStock] {
@@ -90,13 +62,12 @@ class ApplStock {
         return stocksByMonthDict.sorted{ $0.key < $1.key }
     }
     
-    //static func sortStocks(S)
-    
-    static func dateConversion(dateStr: String) -> (month: String, Year: String) {
+    static func dateConversion(dateStr: String) -> (month: String, Year: String)? {
         let arrDate = dateStr.components(separatedBy: "-")
         var month: String
-        let year: String = arrDate.first!
-        switch Int(arrDate.last!)! {
+        guard let year = arrDate.first, let monthNumber = arrDate.last else { return nil }
+        guard let monthNumberInt = Int(monthNumber) else { return nil }
+        switch monthNumberInt {
         case 1:
             month = "January"
         case 2:

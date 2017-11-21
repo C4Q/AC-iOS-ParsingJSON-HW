@@ -54,7 +54,7 @@ extension ApplStockViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let dateAsString = stocksByMonth[section].key
-        let dateMonthYearTuple = ApplStock.dateConversion(dateStr: dateAsString)
+        guard let dateMonthYearTuple = ApplStock.dateConversion(dateStr: dateAsString) else { return nil }
         let arrayOfStocksOfMonth = stocksByMonth[section].value
         let averageOfMonth = ApplStock.findMonthAverage(stockArr: arrayOfStocksOfMonth)
         return dateMonthYearTuple.month + " - " + dateMonthYearTuple.Year + ": Average: " + String(format: "$%.02f", averageOfMonth)

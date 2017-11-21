@@ -65,6 +65,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate {
 }
 
 extension ContactsViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.filteredContactsArray.count
     }
@@ -73,25 +74,18 @@ extension ContactsViewController: UITableViewDataSource {
         let contactCell = tableView.dequeueReusableCell(withIdentifier: "Contact Cell", for: indexPath)
         let selectedContact = self.filteredContactsArray[indexPath.row]
         guard let contactTextLabel = contactCell.textLabel,
-              let contactDetailedTextLabel = contactCell.detailTextLabel,
-              let contactImageView = contactCell.imageView else {
+              let contactDetailedTextLabel = contactCell.detailTextLabel else {
             return contactCell
         }
         contactTextLabel.text = "\(selectedContact.name.first) \(selectedContact.name.last)".capitalized
         contactDetailedTextLabel.text = selectedContact.location.city.capitalized
-        guard let imageURL = URL(string: selectedContact.picture.thumbnail) else { return contactCell }
-        do {
-            let data = try Data(contentsOf: imageURL)
-            contactImageView.image = UIImage(data: data)
-        }
-        catch let error {
-            print(error)
-        }
         return contactCell
     }
+    
 }
 
 extension ContactsViewController: UISearchBarDelegate {
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.searchTerm = searchBar.text
         searchBar.resignFirstResponder()
@@ -100,5 +94,6 @@ extension ContactsViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchTerm = searchText
     }
+    
 }
 
