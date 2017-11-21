@@ -15,6 +15,8 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var searchBar: UISearchBar!
     
     var contacts = [Person]()
+    var sectionNames: [Character] = []
+    var filteringIsOn: Bool = false
     
     func loadData() {
         if let path = Bundle.main.path(forResource: "userinfo", ofType: "json") {
@@ -29,6 +31,15 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
                     print(error)
                 }
             }
+            self.contacts = self.contacts.sorted{$0.name.first < $1.name.first}
+        }
+    }
+    
+    func getSectionNames() {
+        for contact in contacts {
+            if !sectionNames.contains(contact.name.first.first!) {
+                sectionNames.append(contact.name.first.first!)
+            }
         }
     }
     
@@ -40,8 +51,10 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     
     var filteredContactArr: [Person] {//This is to check against nils and also to filter the tableview content based on the searchbar textfield
         guard let searchWord = searchWord, searchWord != "" else {
+            filteringIsOn = false
             return contacts
         }
+        filteringIsOn = true
         return contacts.filter({ ($0.name.first + " " + $0.name.last).lowercased().contains(searchWord.lowercased())})
     }
     
@@ -51,19 +64,45 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         self.contactsTableView.dataSource = self
         self.searchBar.delegate = self
         loadData()
+        getSectionNames()
         
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if filteringIsOn {
+            return 1
+        } else {
+            return sectionNames.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if filteringIsOn {
+            return "All Contacts"
+        } else {
+            return String(sectionNames[section])
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredContactArr.count //The filteredContactsArr is a computed property that will show the full contacts array if the searchbar is not being used, or the filtered contacts if it is being used
+        
+        if filteringIsOn {
+            return filteredContactArr.count
+        } else {
+            let rowsInSection = filteredContactArr.filter{$0.name.first.first == sectionNames[section]}
+            return rowsInSection.count
+        }
+        
+//        return filteredContactArr.count //The filteredContactsArr is a computed property that will show the full contacts array if the searchbar is not being used, or the filtered contacts if it is being used
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        contacts.sort(){$0.name.first < $1.name.first} //To sort the contacts before the data is loaded into the tableview
+        contacts.sort(){($0.name.first+$0.name.last) < ($1.name.first+$1.name.last)} //To sort the contacts before the data is loaded into the tableview
         
-        let contact = filteredContactArr[indexPath.row]
+        let currentRowsInCell = filteredContactArr.filter{$0.name.first.first == sectionNames[indexPath.section]}
+        let contact = (filteringIsOn) ? filteredContactArr[indexPath.row] : currentRowsInCell[indexPath.row]
         
         let cell = contactsTableView.dequeueReusableCell(withIdentifier: "contactCell", for: indexPath)
         
@@ -75,6 +114,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
                 if let data = try? Data.init(contentsOf: pictureURL) {
                     DispatchQueue.main.async {
                         cell.imageView?.image = UIImage(data: data)
+                        cell.setNeedsLayout()
                     }
                 }
             }
@@ -92,11 +132,21 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
         self.searchWord = searchText
     }
     
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        filteringIsOn = false
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailedContactsViewController {
             let selectedRow = contactsTableView.indexPathForSelectedRow!.row
-            let selectedContact = filteredContactArr[selectedRow]
-            destination.aContact = selectedContact //destination.THISNAME HERE should always match the name of the variable on your detailed contacts view controller.
+            if !filteringIsOn {
+                let rowsInSection = filteredContactArr.filter{$0.name.first.first == sectionNames[contactsTableView.indexPathForSelectedRow!.section]}
+                let selectedContact = rowsInSection[selectedRow]
+                destination.aContact = selectedContact //destination.THISNAME HERE should always match the name of the variable on your detailed contacts view controller.
+            } else {
+                let selectedContact = filteredContactArr[selectedRow]
+                destination.aContact = selectedContact //destination.THISNAME HERE should always match the name of the variable on your detailed contacts view controller.
+            }
         }
     }
     
