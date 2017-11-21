@@ -28,5 +28,5 @@ struct Location: Codable {
 }
 
 struct Picture: Codable {
-    var medium: URL
+    var medium: String
 }

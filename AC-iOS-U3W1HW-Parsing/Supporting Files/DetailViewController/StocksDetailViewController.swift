@@ -9,20 +9,36 @@
 import UIKit
 
 class StocksDetailViewController: UIViewController {
-
+    
+    var stocks: Stock?
+    
+    @IBOutlet weak var close: UILabel!
+    
+    @IBOutlet weak var open: UILabel!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var date: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        updateDetail()
+        
     }
     
-   
-
-
+    func updateDetail() {
+        guard let stocks = stocks else {
+            return
+        }
+        date.text = stocks.date
+       open.text = stocks.open.description
+        close.text = stocks.close.description
+        if stocks.open < stocks.close {
+            image.image = #imageLiteral(resourceName: "thumbsUp")
+            view.backgroundColor = .green
+        }
+        else {
+            image.image = #imageLiteral(resourceName: "thumbsDown")
+            view.backgroundColor = .red
     
+    }
+    
+}
 }

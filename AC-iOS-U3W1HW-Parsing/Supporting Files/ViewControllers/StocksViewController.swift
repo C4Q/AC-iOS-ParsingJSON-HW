@@ -44,9 +44,7 @@ class StocksViewController: UIViewController {
             let myURL = URL(fileURLWithPath: path)
             if let data = try? Data(contentsOf: myURL) {
                 self.stockArray = Stock.getStocks(from: data)
-                
-//                self.stocksDictionary = args.1
-//                self.sectionArray = args.0
+               
             }
 
         }
@@ -61,16 +59,6 @@ extension StocksViewController: UITableViewDataSource {
         return  stocksInSection(section).count
     }
     
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Stock Cell", for: indexPath)
-//        let selectedRow = indexPath.row
-//        let selectedSection = indexPath.section
-//        let selectedStock = stocksDictionary[sectionArray[selectedSection]]![selectedRow]
-//        print(selectedStock)
-//        cell.textLabel?.text = selectedStock.date
-//        cell.detailTextLabel?.text = selectedStock.close.description
-//        return cell
-//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Stock Cell", for: indexPath)
@@ -84,6 +72,16 @@ extension StocksViewController: UITableViewDataSource {
         let average = Stock.averageOfMonth(stockArr: stocksInSection(section))
         return "\(sectionName[section]): Average: $\(String(format: "%.2f", average))"
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? StocksDetailViewController {
+            let selectedRow = tableView.indexPathForSelectedRow!.row
+            let selectedStock = stockArray[selectedRow]
+            destination.stocks = selectedStock
+        }
+    }
+        
+    
     
 }
 

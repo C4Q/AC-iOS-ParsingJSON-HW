@@ -18,21 +18,29 @@ class ContactsDetailViewController: UIViewController {
     
     @IBOutlet weak var location: UILabel!
     override func viewDidLoad() {
-        
+        updateDetail()
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    func updateDetail() {
+        guard let selectedContact = selectedContact else {
+            return
+        }
+        if let pictureURL = URL(string: selectedContact.picture.medium) {
+            DispatchQueue.global().sync {
+                if let data = try? Data.init(contentsOf: pictureURL) {
+                    DispatchQueue.main.async {
+                        self.ContactImage.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
+//        ContactImage.image = #imageLiteral(resourceName: "profileImage")
+        nameLabel.text = selectedContact.name.first + " " + selectedContact.name.last
+        email.text = selectedContact.email
+        location.text = selectedContact.location.city
     
-//    func setUpUI() {
-//        navigationItem.title =
-//        
-//  
-//}
+}
     
 }

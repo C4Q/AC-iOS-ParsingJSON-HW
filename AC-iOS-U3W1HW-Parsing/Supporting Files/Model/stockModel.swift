@@ -32,31 +32,7 @@ class Stock {
         self.init(date: date, open: open!, close: close!)
     }
     
-//    static func getStocks(from data: Data) -> ([String], [String: [Stock]]){
-//        var stocksDictionary = [String: [Stock]]()
-//        var sectionArray = [String]()
-//        do {
-//            let json = try JSONSerialization.jsonObject(with: data, options: [])
-//            guard let jsonDictArr = json as? [[String: Any]] else {return (sectionArray, stocksDictionary)}
-//            for jsonDict in jsonDictArr {
-//                if let newStock = Stock.init(from: jsonDict) {
-//                    if stocksDictionary[newStock.sectionNameNeedAverage] == nil {
-//                        stocksDictionary[newStock.sectionNameNeedAverage] = []
-//                        sectionArray.append(newStock.sectionNameNeedAverage)
-//                        var average = [Double]()
-//                        for (stock, value) in stocksDictionary {
-//                            var counter = 0
-//                            for open in value {
-//                                counter += 1
-//                                var addingValues: Double = 0.0
-//                                addingValues += open.open
-//                                (addingValues)/(Double(counter))
-//
-//                            }
-    //                    stocksDictionary[newStock.sectionNameNeedAverage]?.append(newStock)
-//
-//
-//                        }
+
     static func getStocks(from data: Data) -> [Stock] {
         var stocks = [Stock]()
         do {
