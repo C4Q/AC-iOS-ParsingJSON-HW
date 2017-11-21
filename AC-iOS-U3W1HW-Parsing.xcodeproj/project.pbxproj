@@ -19,6 +19,7 @@
 		93BAEF1D1FBE5B0700EF1CED /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAEF1C1FBE5B0700EF1CED /* ContactsViewController.swift */; };
 		93BAEF1F1FBE5B4B00EF1CED /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAEF1E1FBE5B4B00EF1CED /* Contacts.swift */; };
 		93BAEF211FBE5B6100EF1CED /* Stocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAEF201FBE5B6100EF1CED /* Stocks.swift */; };
+		93BAEF671FC3761300EF1CED /* ContactsActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93BAEF661FC3761300EF1CED /* ContactsActionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		93BAEF1C1FBE5B0700EF1CED /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		93BAEF1E1FBE5B4B00EF1CED /* Contacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
 		93BAEF201FBE5B6100EF1CED /* Stocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stocks.swift; sourceTree = "<group>"; };
+		93BAEF661FC3761300EF1CED /* ContactsActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsActionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				93BAEF141FBE582500EF1CED /* DetailedContactsViewController.swift */,
+				93BAEF661FC3761300EF1CED /* ContactsActionViewController.swift */,
 				93BAEF1C1FBE5B0700EF1CED /* ContactsViewController.swift */,
 				93BAEF1E1FBE5B4B00EF1CED /* Contacts.swift */,
 			);
@@ -188,6 +191,7 @@
 				93BAEF211FBE5B6100EF1CED /* Stocks.swift in Sources */,
 				93BAEF1F1FBE5B4B00EF1CED /* Contacts.swift in Sources */,
 				541D380A1FBCDEA900F6A0A9 /* AppDelegate.swift in Sources */,
+				93BAEF671FC3761300EF1CED /* ContactsActionViewController.swift in Sources */,
 				93BAEF171FBE587C00EF1CED /* StocksViewController.swift in Sources */,
 				93BAEF1D1FBE5B0700EF1CED /* ContactsViewController.swift in Sources */,
 			);

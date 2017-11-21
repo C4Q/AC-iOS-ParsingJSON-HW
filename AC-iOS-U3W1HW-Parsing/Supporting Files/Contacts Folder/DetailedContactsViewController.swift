@@ -93,5 +93,20 @@ class DetailedContactsViewController: UIViewController, UITableViewDelegate, UIT
     
     
     
+    
+    
+//    //Segue
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? DetailedContactsViewController {
+//            let selectedRow = tableView.indexPathForSelectedRow?.row
+//            let selectedAction = personalInfo[selectedRow!]
+//
+//
+//            destination.personalInfo = selectedAction
+//
+//        }
+//    }
+    
+    
 
 }

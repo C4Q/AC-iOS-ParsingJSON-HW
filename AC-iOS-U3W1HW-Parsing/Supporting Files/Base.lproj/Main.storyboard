@@ -171,6 +171,9 @@
                                             <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.59265303938356162" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="NEP-f6-pay" kind="show" id="QNF-DN-K59"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -206,6 +209,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i8R-wY-J7W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2352.8000000000002" y="-1950.6746626686659"/>
+        </scene>
+        <!--Contacts Action View Controller-->
+        <scene sceneID="UzA-v4-xg8">
+            <objects>
+                <viewController id="NEP-f6-pay" customClass="ContactsActionViewController" customModule="AC_iOS_U3W1HW_Parsing" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7bN-AU-pDF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calling" translatesAutoresizingMaskIntoConstraints="NO" id="qvH-iI-Um6">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qvH-iI-Um6" firstAttribute="trailing" secondItem="kKV-Cn-rbq" secondAttribute="trailing" id="aOm-3d-b1M"/>
+                            <constraint firstItem="qvH-iI-Um6" firstAttribute="top" secondItem="kKV-Cn-rbq" secondAttribute="top" id="n9U-Ee-XRY"/>
+                            <constraint firstItem="qvH-iI-Um6" firstAttribute="leading" secondItem="kKV-Cn-rbq" secondAttribute="leading" id="nFd-v0-wDw"/>
+                            <constraint firstItem="qvH-iI-Um6" firstAttribute="bottom" secondItem="kKV-Cn-rbq" secondAttribute="bottom" id="uYF-Lw-xyY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kKV-Cn-rbq"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="qvH-iI-Um6" id="ttF-GE-iAX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e0s-Gz-IZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3190" y="-1951"/>
         </scene>
         <!--Stocks-->
         <scene sceneID="ddg-uw-7mD">
@@ -350,6 +382,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="calling" width="250" height="444"/>
         <image name="profileImage" width="600" height="600"/>
     </resources>
 </document>
