@@ -15,7 +15,7 @@ class StockDetailViewController: UIViewController {
     @IBOutlet weak var picView: UIImageView!
     @IBOutlet weak var openLabel: UILabel!
     @IBOutlet weak var closeLabel: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
