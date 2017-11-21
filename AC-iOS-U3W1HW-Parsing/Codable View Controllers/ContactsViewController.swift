@@ -8,14 +8,11 @@
 
 import UIKit
 
-class ContactsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class ContactsViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var contactsSearchBar: UISearchBar!
     
     @IBOutlet weak var contactsTableView: UITableView!
-    
-    
-    /// add search bar delegates
     
     
     var contactArr = [Results]()
@@ -23,7 +20,6 @@ class ContactsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.contactsTableView.dataSource = self
-        self.contactsTableView.delegate = self
         self.contactsSearchBar.delegate = self
         loadContactData()
     }

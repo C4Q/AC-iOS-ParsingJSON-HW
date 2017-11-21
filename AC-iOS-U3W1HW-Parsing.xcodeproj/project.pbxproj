@@ -16,9 +16,9 @@
 		813C37E41FC36F9A00EC1166 /* StocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C37E31FC36F9A00EC1166 /* StocksViewController.swift */; };
 		813C37E61FC370B000EC1166 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813C37E51FC370B000EC1166 /* Stock.swift */; };
 		8150626B1FC0F33C00FDD8F2 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8150626A1FC0F33C00FDD8F2 /* ContactDetailViewController.swift */; };
-		817A3A0E1FC354DC00770C55 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 817A3A0D1FC354DC00770C55 /* Default-568h@2x.png */; };
 		819B74361FBF8B0D000E5E00 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B74351FBF8B0D000E5E00 /* ContactsViewController.swift */; };
 		819B74381FBF8D92000E5E00 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819B74371FBF8D92000E5E00 /* Contact.swift */; };
+		81C80A891FC37EC800CC0BDE /* StockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C80A881FC37EC800CC0BDE /* StockDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +33,9 @@
 		813C37E31FC36F9A00EC1166 /* StocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksViewController.swift; sourceTree = "<group>"; };
 		813C37E51FC370B000EC1166 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		8150626A1FC0F33C00FDD8F2 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
-		817A3A0D1FC354DC00770C55 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		819B74351FBF8B0D000E5E00 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		819B74371FBF8D92000E5E00 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		81C80A881FC37EC800CC0BDE /* StockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,6 @@
 		541D37FD1FBCDEA900F6A0A9 = {
 			isa = PBXGroup;
 			children = (
-				817A3A0D1FC354DC00770C55 /* Default-568h@2x.png */,
 				541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */,
 				541D381D1FBCDFE100F6A0A9 /* userinfo.json */,
 				541D38081FBCDEA900F6A0A9 /* AC-iOS-U3W1HW-Parsing */,
@@ -113,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				813C37E31FC36F9A00EC1166 /* StocksViewController.swift */,
+				81C80A881FC37EC800CC0BDE /* StockDetailViewController.swift */,
 			);
 			path = "Downcasting View Controllers";
 			sourceTree = "<group>";
@@ -181,7 +181,6 @@
 				541D380F1FBCDEA900F6A0A9 /* Main.storyboard in Resources */,
 				541D381C1FBCDFAC00F6A0A9 /* applstockinfo.json in Resources */,
 				541D381E1FBCDFE100F6A0A9 /* userinfo.json in Resources */,
-				817A3A0E1FC354DC00770C55 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +193,7 @@
 			files = (
 				541D380A1FBCDEA900F6A0A9 /* AppDelegate.swift in Sources */,
 				819B74381FBF8D92000E5E00 /* Contact.swift in Sources */,
+				81C80A891FC37EC800CC0BDE /* StockDetailViewController.swift in Sources */,
 				813C37E61FC370B000EC1166 /* Stock.swift in Sources */,
 				8150626B1FC0F33C00FDD8F2 /* ContactDetailViewController.swift in Sources */,
 				819B74361FBF8B0D000E5E00 /* ContactsViewController.swift in Sources */,
