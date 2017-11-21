@@ -44,11 +44,11 @@ class Picture: Codable {
     private(set) var thumbnailImage: UIImage? = nil
     
     private enum CodingKeys: String, CodingKey {
-        case large
+        case large    
         case thumbnail
     }
 
-    func getThumbnail(onComplete: @escaping () -> Void) {
+    func getThumbnail(onComplete: @escaping() -> Void) {
         guard let url = URL(string: thumbnail) else { return }
         UIImage.fetchAsync(url: url) { (image: UIImage) in
             self.thumbnailImage = image
@@ -84,7 +84,7 @@ class JSONHandler {
             if let data = try? Data(contentsOf: myURL) {
                 do {
                     let resultsWrapper = try JSONDecoder().decode(ResultsWrapper.self, from: data)
-                    contacts = resultsWrapper.results
+                    contacts = resultsWrapper.results.sorted { $0.name.first < $1.name.first }
                 }
                 catch {
                     print(error)

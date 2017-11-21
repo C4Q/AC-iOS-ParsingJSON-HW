@@ -18,6 +18,11 @@ class FormattedContact {
     let homeNumberString: String
     let picture: Picture
     
+    var firstLetter: String {
+        let first = fullName.first ?? " "
+        return String(first).uppercased()
+    }
+    
     init(fullName: String,
 //         thumbnailUrlString: String,
 //         largeUrlString: String,
