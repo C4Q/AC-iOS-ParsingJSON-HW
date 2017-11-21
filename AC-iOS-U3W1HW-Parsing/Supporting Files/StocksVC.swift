@@ -20,7 +20,6 @@ class StocksVC: UIViewController, UITableViewDelegate {
 	//MARK: - Variables/Constants
 	var stocks = [Stock]()
 	var stocksSectionHeaders: [String] = []
-	var avgOpenStr = ""
 	
 	//MARK: - Functions
 	func getStockData() {
@@ -37,10 +36,7 @@ class StocksVC: UIViewController, UITableViewDelegate {
 		}
 	}
 	
-}
-
-//MARK: - Section Headers
-extension StocksVC {
+	//MARK: - Section Headers
 	func getStocksSectionHeaders() {
 		for currentStock in stocks {
 			if !stocksSectionHeaders.contains(currentStock.sectionHeader){
@@ -52,6 +48,14 @@ extension StocksVC {
 	func stocksSection(_ section: Int) -> [Stock] {
 		return stocks.filter { $0.sectionHeader == stocksSectionHeaders[section] }
 	}
+	
+	func averagePriceInSection(_ section: Int) -> String {
+		let stocksForMonth = stocksSection(section)
+		let allPricesForMonth: [Float] = stocksForMonth.map { $0.open }
+		let average: Float = allPricesForMonth.reduce(0, +) / Float(allPricesForMonth.count)
+		return "\(average)"
+	}
+	
 }
 
 //MARK: - stocksTableView - DataSource Methods
@@ -61,24 +65,10 @@ extension StocksVC: UITableViewDataSource {
 	}
 	
 	func tableView(_ stockTableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		var prices = [Float]()
-		//use a dictionary to cut down time - only need to create  the dictionary once, then just call the key here
-		let sectionStocks = stocks.filter { $0.sectionHeader == stocksSectionHeaders[section] }
-		sectionStocks.forEach {prices.append($0.open)} //append each value to an array
-		avgOpenStr = String(format:"Avg: $%.2f", (prices.reduce(0, +) / Float(prices.count)))
-		return ("\(stocksSectionHeaders[section]) - \(avgOpenStr)")
-		
-		/* -- if I use dictionary to model
-		var myOpenDict = [String: [Float]]() //creating a dictionary with String key, and array of open price values
-		
-		//adding to the dictionary
-		myOpenDict = ["January 2015" : [20.5, 40.5, 30.6, 60.6], "February 2015" : [20.5, 40.5, 30.6, 60.6], "March 2015" : [20.5, 40.5, 30.6, 60.6]]
-		
-		var sectionHeader = "January 2015"
-		var avgOfNumsInSection = myOpenDict[sectionHeader]!.reduce(0, +) / Float(myOpenDict[sectionHeader]!.count)
-		print(avgOfNumsInSection)
-		*/
-		
+		let monthAndYear = stocksSectionHeaders[section]
+		let average = Float(averagePriceInSection(section))!
+		let fullTitleforHeader = monthAndYear + "   " + String(format:"Avg: $%.2f", average)
+		return fullTitleforHeader
 	}
 	
 	func tableView(_ stockTableView: UITableView, numberOfRowsInSection section: Int) -> Int {

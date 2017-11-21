@@ -17,7 +17,7 @@ class Stock {
 	let longDate: String
 	var sectionHeader: String { return monthYearDate }
 	
-	//UPDATE: use built-in DateFormatter to create Date formats
+	//UPDATE: use built-in DateFormatter to create custom Date formats
 	static func buildDateFormatter(dateFormat: String) -> DateFormatter {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = dateFormat
@@ -27,17 +27,6 @@ class Stock {
 	static let monthYearDateFormatter = buildDateFormatter(dateFormat: "MMMM, yyyy") //November 2015
 	static let shortDateFormatter = buildDateFormatter(dateFormat: "MMM dd, YYYY")//Nov 13, 2015
 	static let longDateFormatter = buildDateFormatter(dateFormat: "MMMM dd, yyyy") //November 13, 2015
-	
-	/* - 	//my original way to format date --2015-11-13 = Nov 2015
-	var monthYearDate: String {
-		enum Month: Int {
-			case January = 01, February, March, April, May, June, July, August, September, October, November, December
-		}
-		let year: String = String(date[date.index(date.startIndex, offsetBy: 0)..<date.index(date.endIndex, offsetBy: -6)])
-		let month = Int((date[date.index(date.startIndex, offsetBy: 5)..<date.index(date.endIndex, offsetBy: -3)]))
-		return "\(Month.init(rawValue: month!)!) \(year)"
-	}
-	*/
 	
 	init(date: String, open: Float, close: Float, low: Float, high: Float, volume: Int) {
 		self.date = date
@@ -52,7 +41,9 @@ class Stock {
 			self.shortDate = Stock.shortDateFormatter.string(from: inputDate)
 			self.longDate = Stock.longDateFormatter.string(from: inputDate)
 		} else {
-			self.monthYearDate = "invalid date"; self.shortDate = "invalid date"; self.longDate = "invalid date"
+			self.monthYearDate = "invalid date"
+			self.shortDate = "invalid date"
+			self.longDate = "invalid date"
 		}
 		return
 	}
