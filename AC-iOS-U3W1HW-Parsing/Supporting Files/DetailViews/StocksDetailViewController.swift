@@ -21,7 +21,6 @@ class StocksDetailViewController: UIViewController {
         super.viewDidLoad()
         updateData()
     }
-
     func updateData() {
         guard let stock = selectedStock else {
             return

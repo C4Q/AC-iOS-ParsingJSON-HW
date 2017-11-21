@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class ContactListViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UISearchResultsUpdating {
 
     var contactArr = [Contact]()
     
@@ -23,8 +23,8 @@ class ContactListViewController: UIViewController, UITableViewDelegate, UITableV
             return contactArr
         }
         let selectedIndex = self.searchController.searchBar.selectedScopeButtonIndex
-        let filteringCriteria = scopeTitles[selectedIndex]
-        switch filteringCriteria {
+        let filteringTitle = scopeTitles[selectedIndex]
+        switch filteringTitle {
         case "First Name":
             return contactArr.filter{$0.name.first.contains(searchTerm.lowercased())}
         case "Last Name":
@@ -38,19 +38,6 @@ class ContactListViewController: UIViewController, UITableViewDelegate, UITableV
             self.tableView.reloadData()
         }
     }
-    
-    ///Mark - SearchBar
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        self.searchTerm = searchController.searchBar.text
-    }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        self.searchTerm = searchBar.text
-    }
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        tableView.reloadData()
-    }
-    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -66,7 +53,6 @@ class ContactListViewController: UIViewController, UITableViewDelegate, UITableV
         searchController.searchBar.scopeButtonTitles = ["First Name", "Last Name"]
         searchController.searchBar.delegate = self
     }
-    
     func loadData() {
         if let path = Bundle.main.path(forResource: "userinfo", ofType: "json"){
             let myURL = URL(fileURLWithPath: path)
@@ -83,7 +69,28 @@ class ContactListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    ///Mark - TableViewDataSource
+    ///Mark - SearchBar
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        self.searchTerm = searchController.searchBar.text
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.searchTerm = searchBar.text
+    }
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        tableView.reloadData()
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detail = segue.destination as? ContactDetailViewController {
+            let selectedRow = tableView.indexPathForSelectedRow!.row
+            let selectedContact = contactArr[selectedRow]
+            detail.selectedContact = selectedContact
+        }
+    }
+}
+
+extension ContactListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredContactArr.count
@@ -96,13 +103,4 @@ class ContactListViewController: UIViewController, UITableViewDelegate, UITableV
         contactCell.detailTextLabel?.text = "\(contact.location.city.capitalized), \(contact.location.state.capitalized)"
         return contactCell
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let detail = segue.destination as? ContactDetailViewController {
-            let selectedRow = tableView.indexPathForSelectedRow!.row
-            let selectedContact = contactArr[selectedRow]
-            detail.selectedContact = selectedContact
-        }
-    }
-    
 }

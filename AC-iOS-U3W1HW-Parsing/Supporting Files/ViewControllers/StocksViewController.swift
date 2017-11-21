@@ -57,7 +57,6 @@ extension StocksViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StockCell", for: indexPath)
         let stocksInThisSection = stocksInSection(indexPath.section)
-        
         let thisStock = stocksInThisSection[indexPath.row]
         cell.textLabel?.text = thisStock.date
         cell.detailTextLabel?.text = "\(thisStock.open)"
