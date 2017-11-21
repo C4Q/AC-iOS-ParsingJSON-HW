@@ -34,7 +34,7 @@
         <scene sceneID="Nl2-MG-ulA">
             <objects>
                 <navigationController id="QXg-3L-Qxu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Stocks" id="GHQ-oH-qVy"/>
+                    <tabBarItem key="tabBarItem" title="Stocks" image="line-chart" selectedImage="line-chart" id="GHQ-oH-qVy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NkL-L0-6OZ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -206,7 +206,7 @@
         <scene sceneID="lif-th-ykz">
             <objects>
                 <navigationController id="NRR-6V-3V6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="People" id="xaa-JJ-gdb"/>
+                    <tabBarItem key="tabBarItem" title="People" image="group-button" selectedImage="group-button" id="xaa-JJ-gdb"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1qW-jc-UTr">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -235,12 +235,28 @@
                                 <rect key="frame" x="-0.5" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" id="han-aE-H2N">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" textLabel="qTT-2S-poD" detailTextLabel="Kcs-pB-WCM" style="IBUITableViewCellStyleSubtitle" id="han-aE-H2N">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="han-aE-H2N" id="IyV-E9-sNk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qTT-2S-poD">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kcs-pB-WCM">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="DkU-Dn-RLr" kind="show" id="1KZ-BB-fjc"/>
@@ -335,4 +351,8 @@
             <point key="canvasLocation" x="1520.8" y="-603.14842578710648"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="group-button" width="24" height="24"/>
+        <image name="line-chart" width="24" height="24"/>
+    </resources>
 </document>

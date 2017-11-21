@@ -61,7 +61,7 @@ extension StocksTableViewController: UITableViewDelegate, UITableViewDataSource 
         let year = dateArray[0]
         let monthString = appleStocks[section][0].label.components(separatedBy: " ")[0]
         let average = String(format: "%.2f", monthlyAverages[month]!)
-        return "\(monthString) \(year): \(average)"
+        return "\(monthString) - \(year): Average: $\(average)"
     }
     
     
