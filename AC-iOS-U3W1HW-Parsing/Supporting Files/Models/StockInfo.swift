@@ -15,6 +15,16 @@ class StockInfo {
     let openingAmount: Double
     let closingAmount: Double
     
+    var theSectionNames: String {
+        var dateAsArr = date?.split(separator: "-")
+        let year = dateAsArr![0]
+        let month = String(dateAsArr![1])
+        return "\(months[month]!)-\(year)"
+    }
+    
+    let months = ["01": "January", "02": "February", "03": "March", "04": "April", "05": "May", "06": "June", "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December"]
+    
+    
     init(date: String?, openingAmount: Double, closingAmount: Double) {
         self.date = date
         self.openingAmount = openingAmount

@@ -8,14 +8,25 @@
 
 import UIKit
 
-//searchbar and filtering
-
-
+//make network call
+//get data
+//turn data into what we want (swift types: Arrays, Dicts)
+//set properties do we can manipulate as neeed
+//breakpoints where things are being set ex) array.count
 
 class ContactsTableViewController: UIViewController {
     
     //create instance of array
     var contacts = [Person]()
+    
+    ///Search Bar properties
+    //This will reload tableview as text changes
+    var searchTerm: String?{
+        didSet{
+            self.contactsTableView.reloadData()
+        }
+    }
+    let searchController = UISearchController(searchResultsController: nil)
     
     //connect tableview to View Controller
     @IBOutlet weak var contactsTableView: UITableView!
@@ -24,18 +35,30 @@ class ContactsTableViewController: UIViewController {
         super.viewDidLoad()
         //setup delegates
         contactsTableView.dataSource = self
-        //contactsTableView.delegate = self
+        searchController.searchBar.delegate = self
         //call function to retrieve data
         loadContactsData()
+        //setup for searchbar
+        setUPSearchBarUI()
     }
     
-    //make a get data function
+    func setUPSearchBarUI(){
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.scopeButtonTitles = ["First Name", "Last Name", "City Location"]
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    /// MARK: - Create Function to Load Contacts Data
     func loadContactsData(){
         //unwrap and setup path
         if let path = Bundle.main.path(forResource: "userinfo", ofType: "json") {
             //setup url filepath with path
             let url = URL(fileURLWithPath: path)
             //unwrap and setup data with contents of url
+            //turning json into data
             if let data = try? Data(contentsOf: url){
                 //setup JSON Decoder
                 let myDecoder = JSONDecoder()
@@ -46,18 +69,48 @@ class ContactsTableViewController: UIViewController {
                     //set that to the contacts instance
                     //self.contacts refers to its instance of the ViewController
                     self.contacts = contactInfo.results
-                    contacts.sort(){$0.name.first < $1.name.first}
+                    
+                    //sorting contacts by full name
+                    contacts.sort(){($0.name.first+$0.name.last) < ($1.name.first+$1.name.last)}
+                    
                 } catch let error {
                     print(error)
                 }
             }
-            for person in contacts{
-                print(person.name, person.location.city, person.email)
-            }
+            //            for person in contacts{
+            //                print(person.name, person.location.city, person.email)
+            //            }
         }
     }
     
-    //make segue going to detail contacts view
+    /// MARK: - Filtering with SearchBar using computed Property
+    //empty array for filtering
+    var contactsArr: [Person] = []
+    
+    var filteredContactsArr: [Person] {
+        //guard for searchterm and if not nil, return original array
+        guard let searchTerm = searchTerm, searchTerm != "" else {
+            return contacts
+        }
+        //make sure there are scope titles in the searchBar
+        guard let scopeTitles = self.searchController.searchBar.scopeButtonTitles else{return contactsArr}
+        let selectedIndexOfScopeTitles = self.searchController.searchBar.selectedScopeButtonIndex
+        let filteringCriteriaForScopeButtons = scopeTitles[selectedIndexOfScopeTitles]
+        switch filteringCriteriaForScopeButtons{
+        case "First Name":
+            return contacts.filter({ ($0.name.first).lowercased().contains(searchTerm.lowercased())})
+        case "Last Name":
+            return contacts.filter({ ($0.name.last).lowercased().contains(searchTerm.lowercased())})
+        case "City Location":
+            return contacts.filter({ ($0.location.city).lowercased().contains(searchTerm.lowercased())})
+        default:
+            return contactsArr
+        }
+        ///if not using scope buttons
+        //  return contacts.filter({ ($0.name.first + " " + $0.name.last).lowercased().contains(searchTerm.lowercased())})
+    }
+    
+    /// MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         if let destination = segue.destination as? DetailContactsViewController{
@@ -68,23 +121,21 @@ class ContactsTableViewController: UIViewController {
             
         }
     }
-    
 }
 
+/// MARK: - Building Table View
 
-
-//make extension to build out tableView
 extension ContactsTableViewController: UITableViewDataSource{
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        return filteredContactsArr.count //contacts.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Person Cell", for: indexPath)
         
-        let person = contacts[indexPath.row]
+        let person = filteredContactsArr[indexPath.row] //contacts[indexPath.row]
         
         cell.textLabel?.text = person.name.first.capitalized + " " + person.name.last.capitalized
         cell.detailTextLabel?.text = person.location.city
@@ -95,32 +146,65 @@ extension ContactsTableViewController: UITableViewDataSource{
                 if let data = try? Data.init(contentsOf: pictureURL)  {
                     DispatchQueue.main.async {
                         cell.imageView?.image = UIImage(data: data)
-                        //Call this method on your application’s main thread when you want to adjust the layout of a view’s subviews. This method makes a note of the request and returns immediately. Because this method does not force an immediate update, but instead waits for the next update cycle, you can use it to invalidate the layout of multiple views before any of those views are updated. This behavior allows you to consolidate all of your layout updates to one update cycle, which is usually better for performance.
-                        //refreshes the cell
+                        
+                        //refreshes the cell: look at documentation
                         cell.setNeedsLayout()
                     }
                 }
             }
         }
-        
         return cell
     }
 }
 
+/// MARK: - SearchBar Functionality
 
-//make extension for searchBar funtionality
-//extension ContactsTableViewController: UISearchController {
+extension ContactsTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    ///computed properties set in main class
     
-    
-    
-    
-    
-    
-//}
+    //UISearchResultsUpdating: live editing
+    func updateSearchResults(for searchController: UISearchController) {
+        self.searchTerm = searchController.searchBar.text
+        searchController.resignFirstResponder()
+        //contactsTableView.reloadData()
+    }
+    //Whenever user clicks on scope button, reload data
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        contactsTableView.reloadData()
+    }
+}
 
+/////////////////////////////////////////////////////////////////////////////////////
 
-
-
+/// MARK: - Notes to set up searchbar Controller Programmatically
+/*
+ 0.var searchTerm: String? {
+ didSet{
+ self.songsTableView.reloadData()
+ }
+ }
+ 1. add protocols: UISearchBarDelegate, UISearchResultsUpdating
+ 2. Instantiate UIController: let searchController = UISearchController(searchResultsController: nil)
+ 
+ 3. Inside viewDidLoad(): make a func first then call func in view did load
+ searchController.searchBar.delegate = self
+ searchController.obscuresBackgroundDuringPresentation = false
+ searchController.hidesNavigationBarDuringPresentation = false
+ searchController.searchBar.scopeButtonTitles = ["song", "artist"]
+ searchController.searchResultsUpdater = self
+ navigationItem.searchController = searchController
+ definesPresentationContext = true
+ 
+ 4. Use searchBar Methods: UISearchResultsUpdating
+ 
+ func updateSearchResults(for searchController: UISearchController) {
+ self.searchTerm = searchController.searchBar.text
+ }
+ Whenever user clicks on button, reload data
+ func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+ songsTableView.reloadData()
+ }
+ */
 
 
 
