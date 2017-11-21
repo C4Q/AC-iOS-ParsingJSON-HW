@@ -20,39 +20,14 @@ struct Contact: Codable {
     let cell: String
     private let dob: String
     var birthday: String {
+        enum Month: Int {
+            case January = 01, February, March, April, May, June, July, August, September, October, November, December
+        }
         let monthIndexSet: IndexSet = [5, 6]
         let dayIndexSet: IndexSet = [8, 9]
         let day = String(dayIndexSet.map { Array(dob)[$0] })
-        var month = String(monthIndexSet.map { Array(dob)[$0] })
-        switch month {
-        case "01":
-            month = "January"
-        case "02":
-            month = "Febuary"
-        case "03":
-            month = "March"
-        case "04":
-            month = "April"
-        case "05":
-            month = "May"
-        case "06":
-            month = "June"
-        case "07":
-            month = "July"
-        case "08":
-            month = "August"
-        case "09":
-            month = "September"
-        case "10":
-            month = "October"
-        case "11":
-            month = "November"
-        case "12":
-            month = "December"
-        default:
-            break
-        }
-        return "\(month) \(day)"
+        let month = String(monthIndexSet.map { Array(dob)[$0] })
+        return "\(Month.init(rawValue: Int(month)!)!) \(day)"
     }
 }
 

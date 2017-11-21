@@ -15,6 +15,7 @@ class ApplStockViewController: UIViewController {
     
     // MARK: - Variables
     var stocks = [ApplStock]()
+    var stocksAsDictionary = [(key: String, value: [ApplStock])]()
     
     // MARK: - Override Functions
     override func viewDidLoad() {
@@ -31,6 +32,17 @@ class ApplStockViewController: UIViewController {
         if let data = try? Data(contentsOf: myURL) {
             self.stocks = ApplStock.getApplStock(from: data)
         }
+        stocksAsDictionary = ApplStock.createDictionary(for: stocks)
+    }
+    
+    //MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ApplDetailViewController {
+            guard let selectedRow = stockTableView.indexPathForSelectedRow?.row else { return }
+            guard let selectedSection = stockTableView.indexPathForSelectedRow?.section else { return }
+            let selectedStock = self.stocksAsDictionary[selectedSection].value[selectedRow]
+            destination.selectedStock = selectedStock
+        }
     }
 }
 
@@ -38,25 +50,29 @@ class ApplStockViewController: UIViewController {
 extension ApplStockViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stocks.count
+        return stocksAsDictionary[section].value.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return stocksAsDictionary.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let stocksInSection = stocksAsDictionary[section].value
+        let currentDatedSection = stocksAsDictionary[section].key
+        return ApplStock.monthAsTextAndYearAsNumber(from: currentDatedSection) + ": Average: " + String(format: "$%.02f", ApplStock.monthlyOpeningAverageCalculated(for: stocksInSection))
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "appleStockCell", for: indexPath)
-        let stock = stocks[indexPath.row]
-        cell.textLabel?.text = stock.date
-        cell.detailTextLabel?.text = stock.open.description
+        let cellRow = indexPath.row
+        let stockSection = indexPath.section
+        let currentStock = stocksAsDictionary[stockSection].value[cellRow]
+        cell.textLabel?.text = currentStock.date
+        cell.detailTextLabel?.text = currentStock.open.description
         return cell
     }
     
-    //MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? ApplDetailViewController {
-            destination.selectedStock = stocks[stockTableView.indexPathForSelectedRow!.row]
-        }
-    }
 }
-
-
 
 
