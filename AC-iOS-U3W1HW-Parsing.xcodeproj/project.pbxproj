@@ -11,8 +11,15 @@
 		541D380F1FBCDEA900F6A0A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541D380D1FBCDEA900F6A0A9 /* Main.storyboard */; };
 		541D38111FBCDEA900F6A0A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 541D38101FBCDEA900F6A0A9 /* Assets.xcassets */; };
 		541D38141FBCDEA900F6A0A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */; };
-		541D381C1FBCDFAC00F6A0A9 /* applstockinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */; };
 		541D381E1FBCDFE100F6A0A9 /* userinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 541D381D1FBCDFE100F6A0A9 /* userinfo.json */; };
+		8102C40E1FC4F14F000D5E00 /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8102C40D1FC4F14F000D5E00 /* ContactDetailViewController.swift */; };
+		817E945B1FBF3BC600A06E02 /* StockPrices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E945A1FBF3BC600A06E02 /* StockPrices.swift */; };
+		817E945D1FBF3BD800A06E02 /* StockPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E945C1FBF3BD800A06E02 /* StockPriceViewController.swift */; };
+		81AF8BCA1FBF3F990008B618 /* applstockinfo.json in Resources */ = {isa = PBXBuildFile; fileRef = 81AF8BC91FBF3F990008B618 /* applstockinfo.json */; };
+		81AF8BCC1FBF44700008B618 /* ApplStockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AF8BCB1FBF44700008B618 /* ApplStockDetailViewController.swift */; };
+		81AF8BCE1FBF492B0008B618 /* ContactList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AF8BCD1FBF492B0008B618 /* ContactList.swift */; };
+		81AF8BD01FBF4FB40008B618 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AF8BCF1FBF4FB40008B618 /* APIManager.swift */; };
+		81C6A0E81FC1F8D5003704EF /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C6A0E71FC1F8D5003704EF /* ContactListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +29,15 @@
 		541D38101FBCDEA900F6A0A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		541D38131FBCDEA900F6A0A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		541D38151FBCDEA900F6A0A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = applstockinfo.json; sourceTree = "<group>"; };
 		541D381D1FBCDFE100F6A0A9 /* userinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = userinfo.json; sourceTree = "<group>"; };
+		8102C40D1FC4F14F000D5E00 /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
+		817E945A1FBF3BC600A06E02 /* StockPrices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockPrices.swift; sourceTree = "<group>"; };
+		817E945C1FBF3BD800A06E02 /* StockPriceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockPriceViewController.swift; sourceTree = "<group>"; };
+		81AF8BC91FBF3F990008B618 /* applstockinfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = applstockinfo.json; sourceTree = "<group>"; };
+		81AF8BCB1FBF44700008B618 /* ApplStockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplStockDetailViewController.swift; sourceTree = "<group>"; };
+		81AF8BCD1FBF492B0008B618 /* ContactList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactList.swift; sourceTree = "<group>"; };
+		81AF8BCF1FBF4FB40008B618 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		81C6A0E71FC1F8D5003704EF /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +54,7 @@
 		541D37FD1FBCDEA900F6A0A9 = {
 			isa = PBXGroup;
 			children = (
-				541D381B1FBCDFAC00F6A0A9 /* applstockinfo.json */,
+				81AF8BC91FBF3F990008B618 /* applstockinfo.json */,
 				541D381D1FBCDFE100F6A0A9 /* userinfo.json */,
 				541D38081FBCDEA900F6A0A9 /* AC-iOS-U3W1HW-Parsing */,
 				541D38071FBCDEA900F6A0A9 /* Products */,
@@ -58,6 +72,9 @@
 		541D38081FBCDEA900F6A0A9 /* AC-iOS-U3W1HW-Parsing */ = {
 			isa = PBXGroup;
 			children = (
+				81AF8BCD1FBF492B0008B618 /* ContactList.swift */,
+				81AF8BCF1FBF4FB40008B618 /* APIManager.swift */,
+				817E945A1FBF3BC600A06E02 /* StockPrices.swift */,
 				541D381F1FBCE08B00F6A0A9 /* Supporting Files */,
 				541D38151FBCDEA900F6A0A9 /* Info.plist */,
 			);
@@ -67,8 +84,12 @@
 		541D381F1FBCE08B00F6A0A9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				541D38091FBCDEA900F6A0A9 /* AppDelegate.swift */,
 				541D380D1FBCDEA900F6A0A9 /* Main.storyboard */,
+				817E945C1FBF3BD800A06E02 /* StockPriceViewController.swift */,
+				81AF8BCB1FBF44700008B618 /* ApplStockDetailViewController.swift */,
+				81C6A0E71FC1F8D5003704EF /* ContactListViewController.swift */,
+				8102C40D1FC4F14F000D5E00 /* ContactDetailViewController.swift */,
+				541D38091FBCDEA900F6A0A9 /* AppDelegate.swift */,
 				541D38101FBCDEA900F6A0A9 /* Assets.xcassets */,
 				541D38121FBCDEA900F6A0A9 /* LaunchScreen.storyboard */,
 			);
@@ -135,9 +156,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				541D38141FBCDEA900F6A0A9 /* LaunchScreen.storyboard in Resources */,
+				81AF8BCA1FBF3F990008B618 /* applstockinfo.json in Resources */,
 				541D38111FBCDEA900F6A0A9 /* Assets.xcassets in Resources */,
 				541D380F1FBCDEA900F6A0A9 /* Main.storyboard in Resources */,
-				541D381C1FBCDFAC00F6A0A9 /* applstockinfo.json in Resources */,
 				541D381E1FBCDFE100F6A0A9 /* userinfo.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -149,7 +170,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81AF8BD01FBF4FB40008B618 /* APIManager.swift in Sources */,
+				817E945D1FBF3BD800A06E02 /* StockPriceViewController.swift in Sources */,
+				8102C40E1FC4F14F000D5E00 /* ContactDetailViewController.swift in Sources */,
+				81AF8BCC1FBF44700008B618 /* ApplStockDetailViewController.swift in Sources */,
+				817E945B1FBF3BC600A06E02 /* StockPrices.swift in Sources */,
 				541D380A1FBCDEA900F6A0A9 /* AppDelegate.swift in Sources */,
+				81C6A0E81FC1F8D5003704EF /* ContactListViewController.swift in Sources */,
+				81AF8BCE1FBF492B0008B618 /* ContactList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
