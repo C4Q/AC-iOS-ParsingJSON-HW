@@ -160,7 +160,7 @@ class ContactsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
+        resignFirstResponder()
     }
     
     
